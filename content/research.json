@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "title": "Rocky-shore biodiversity survey",
+      "date": "2026-05-01",
+      "cover": "",
+      "summary": "A transect survey of intertidal species across a Cornish rocky shore, comparing biodiversity between sheltered and exposed zones.",
+      "link": "",
+      "linkLabel": "Read the write-up"
+    },
+    {
+      "title": "Shore crab population study",
+      "date": "2026-02-01",
+      "cover": "",
+      "summary": "Mark-recapture study estimating the population and size distribution of green shore crabs (Carcinus maenas) in an estuary.",
+      "link": "",
+      "linkLabel": "View project"
+    },
+    {
+      "title": "Seagrass & carbon storage review",
+      "date": "2025-11-01",
+      "cover": "",
+      "summary": "A literature review on the role of seagrass meadows as blue-carbon habitats and their importance for coastal resilience.",
+      "link": "",
+      "linkLabel": "Read the review"
+    }
+  ]
+}

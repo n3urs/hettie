@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post — Hettie</title>
+  <meta name="description" content="A blog post on marine ecology by Hettie.">
+  <meta name="theme-color" content="#f4faf9">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23073b4c'/%3E%3Cg fill='none' stroke='%232ec4b6' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 38 a14 11 0 0 1 28 0'/%3E%3Cpath d='M26 29 v-5'/%3E%3Cpath d='M38 29 v-5'/%3E%3Cpath d='M18 36 q-8 -1 -11 4'/%3E%3Cpath d='M46 36 q8 -1 11 4'/%3E%3Cpath d='M22 42 l-7 6'/%3E%3Cpath d='M42 42 l7 6'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600;1,9..144,700&family=Inter:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="index.html" class="brand" aria-label="Home">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="cg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1f7a5a"/><stop offset="0.5" stop-color="#12a5a0"/><stop offset="1" stop-color="#3aa0e0"/></linearGradient></defs><g fill="none" stroke="url(#cg)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 38 a14 11 0 0 1 28 0"/><path d="M18 38 q14 9 28 0"/><path d="M26 29 v-5"/><path d="M38 29 v-5"/><path d="M18 36 q-8 -1 -11 4"/><path d="M7 40 l-4 -3 M7 40 l-1 5"/><path d="M46 36 q8 -1 11 4"/><path d="M57 40 l4 -3 M57 40 l1 5"/><path d="M22 42 l-7 6"/><path d="M25 44 l-5 8"/><path d="M42 42 l7 6"/><path d="M39 44 l5 8"/></g><circle cx="26" cy="22" r="1.8" fill="url(#cg)"/><circle cx="38" cy="22" r="1.8" fill="url(#cg)"/></svg>
+        <span><b>Hettie</b></span>
+      </a>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html#about">About</a>
+        <a href="index.html#research">Research</a>
+        <a href="index.html#field">Field&nbsp;Notes</a>
+        <a href="index.html#gallery">Gallery</a>
+        <a href="index.html#resources">Resources</a>
+        <a href="blog.html">Blog</a>
+        <a href="index.html#contact" class="cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="sea sea--band" aria-hidden="true">
+      <div class="sun" style="width:64px;height:64px;top:22px"></div>
+      <div class="shore">
+        <div class="wave wave--foam2"></div>
+        <div class="wave wave--foam1"></div>
+        <div class="wave wave--sand"></div>
+      </div>
+    </div>
+    <article class="post-hero">
+      <div class="container">
+        <p style="margin-bottom:22px"><a class="back-link" href="blog.html">Back to blog</a></p>
+        <div id="postContent"><p class="spinner">Loading…</p></div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span class="brand"><b>Hettie</b> · Marine Biologist</span>
+      <span>© <span data-site="year"></span> · Made with 🦀 in Cornwall</span>
+    </div>
+  </footer>
+
+  <script src="js/vendor/md.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/post.js"></script>
+</body>
+</html>

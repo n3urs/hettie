@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "date": "2026-06-20",
+      "location": "Gyllyngvase Beach, Falmouth",
+      "species": "Carcinus maenas",
+      "photo": "",
+      "note": "Dozens of green shore crabs under boulders on a spring low tide. Several females carrying eggs."
+    },
+    {
+      "date": "2026-06-05",
+      "location": "Helford Estuary",
+      "species": "Zostera marina",
+      "photo": "",
+      "note": "Healthy seagrass patch spotted while snorkelling — lots of juvenile fish sheltering among the blades."
+    },
+    {
+      "date": "2026-05-18",
+      "location": "Kynance Cove, Lizard",
+      "species": "Actinia equina",
+      "photo": "",
+      "note": "Beadlet anemones lining a shaded gully. Recorded abundance for a rocky-shore transect."
+    }
+  ]
+}

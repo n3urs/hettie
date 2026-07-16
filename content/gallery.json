@@ -1,0 +1,32 @@
+{
+  "items": [
+    {
+      "title": "Rock-pooling at Gylly",
+      "date": "2026-06-20",
+      "location": "Falmouth, Cornwall",
+      "image": "",
+      "experience": "Early-morning survey of the intertidal zone. We logged **17 species** across three transects, from beadlet anemones to shore crabs.\n\nClick-through photos like this one let visitors read the story behind each moment — swap the image and text in the admin panel."
+    },
+    {
+      "title": "Seagrass snorkel survey",
+      "date": "2026-06-05",
+      "location": "Helford Estuary",
+      "image": "",
+      "experience": "Snorkelling a *Zostera marina* meadow to record shoot density and note the juvenile fish using it as a nursery habitat."
+    },
+    {
+      "title": "Field trip — the Lizard",
+      "date": "2026-05-18",
+      "location": "Kynance Cove",
+      "image": "",
+      "experience": "A day mapping rocky-shore zonation along one of the most biodiverse stretches of the Cornish coast."
+    },
+    {
+      "title": "Lab work",
+      "date": "2026-04-10",
+      "location": "Penryn Campus",
+      "image": "",
+      "experience": "Identifying and measuring invertebrate samples under the microscope for a biodiversity study."
+    }
+  ]
+}

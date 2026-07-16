@@ -1,0 +1,170 @@
+# Decap CMS configuration — the admin panel Hettie uses.
+# Content is stored as JSON files in /content and committed to the repo via Git Gateway.
+
+backend:
+  name: git-gateway
+  branch: main
+
+# Uncomment for local testing without Netlify (run: npx decap-server), then visit /admin
+# local_backend: true
+
+media_folder: "assets/uploads"   # where uploaded images are stored in the repo
+public_folder: "/assets/uploads" # the path used on the live site
+
+site_url: /
+display_url: /
+logo_url: /assets/crab.svg
+
+collections:
+  # ---------------- HOME ----------------
+  - name: "home"
+    label: "🏠 Home page"
+    files:
+      - name: "home"
+        label: "Home / intro"
+        file: "content/home.json"
+        format: json
+        fields:
+          - { label: "Heading", name: "heading", widget: "string", hint: "Wrap words in *stars* to give them the coloured accent." }
+          - { label: "Intro paragraph", name: "intro", widget: "text" }
+          - { label: "Career goals", name: "goals", widget: "text" }
+          - { label: "Your photo", name: "photo", widget: "image", required: false }
+
+  # ---------------- ABOUT ----------------
+  - name: "about"
+    label: "👤 About / CV"
+    files:
+      - name: "about"
+        label: "About me"
+        file: "content/about.json"
+        format: json
+        fields:
+          - { label: "Section title", name: "title", widget: "string" }
+          - { label: "Your story", name: "bio", widget: "markdown" }
+          - { label: "Skills", name: "skills", widget: "list", required: false, hint: "One skill per item." }
+          - { label: "CV button label", name: "cvLabel", widget: "string", required: false }
+          - { label: "CV file / link", name: "cvUrl", widget: "file", required: false, hint: "Upload a PDF or paste a link." }
+          - { label: "'At a glance' title", name: "glanceTitle", widget: "string", required: false }
+          - { label: "'At a glance' text", name: "glance", widget: "markdown", required: false }
+
+  # ---------------- RESEARCH ----------------
+  - name: "research"
+    label: "🔬 Research portfolio"
+    files:
+      - name: "research"
+        label: "Research projects"
+        file: "content/research.json"
+        format: json
+        fields:
+          - label: "Projects"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, required: false }
+              - { label: "Cover image", name: "cover", widget: "image", required: false }
+              - { label: "Summary", name: "summary", widget: "text", required: false }
+              - { label: "Link (optional)", name: "link", widget: "string", required: false }
+              - { label: "Link label", name: "linkLabel", widget: "string", required: false }
+
+  # ---------------- FIELD NOTES ----------------
+  - name: "fieldnotes"
+    label: "🐚 Field notes"
+    files:
+      - name: "fieldnotes"
+        label: "Field notes"
+        file: "content/fieldnotes.json"
+        format: json
+        fields:
+          - label: "Notes"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.date}} — {{fields.location}}"
+            fields:
+              - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, required: false }
+              - { label: "Location", name: "location", widget: "string", required: false }
+              - { label: "Species (shown in italics)", name: "species", widget: "string", required: false }
+              - { label: "Photo", name: "photo", widget: "image", required: false }
+              - { label: "Note", name: "note", widget: "text", required: false }
+
+  # ---------------- GALLERY ----------------
+  - name: "gallery"
+    label: "📸 Interactive gallery"
+    files:
+      - name: "gallery"
+        label: "Gallery photos"
+        file: "content/gallery.json"
+        format: json
+        fields:
+          - label: "Photos"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Photo", name: "image", widget: "image" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, required: false }
+              - { label: "Location", name: "location", widget: "string", required: false }
+              - { label: "The experience (shown when clicked)", name: "experience", widget: "markdown" }
+
+  # ---------------- BLOG ----------------
+  - name: "blog"
+    label: "📝 Blog posts"
+    files:
+      - name: "blog"
+        label: "All blog posts"
+        file: "content/blog.json"
+        format: json
+        fields:
+          - label: "Posts"
+            name: "posts"
+            widget: "list"
+            summary: "{{fields.date}} — {{fields.title}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Slug (web address)", name: "slug", widget: "string", hint: "lowercase-with-dashes, e.g. my-first-post" }
+              - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+              - { label: "Cover image", name: "cover", widget: "image", required: false }
+              - { label: "Short excerpt", name: "excerpt", widget: "text", required: false }
+              - { label: "Tags", name: "tags", widget: "list", required: false }
+              - { label: "Body", name: "body", widget: "markdown" }
+
+  # ---------------- RESOURCES ----------------
+  - name: "resources"
+    label: "🔗 Resources"
+    files:
+      - name: "resources"
+        label: "Resources"
+        file: "content/resources.json"
+        format: json
+        fields:
+          - label: "Links"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Category", name: "category", widget: "string", required: false, hint: "e.g. Dataset, Tutorial, Reference" }
+              - { label: "URL", name: "url", widget: "string", required: false }
+              - { label: "Description", name: "description", widget: "text", required: false }
+
+  # ---------------- CONTACT ----------------
+  - name: "contact"
+    label: "✉️ Contact"
+    files:
+      - name: "contact"
+        label: "Contact details"
+        file: "content/contact.json"
+        format: json
+        fields:
+          - { label: "Intro line", name: "blurb", widget: "text", required: false }
+          - { label: "Email", name: "email", widget: "string", required: false }
+          - { label: "LinkedIn URL", name: "linkedin", widget: "string", required: false }
+          - label: "Other links"
+            name: "links"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }

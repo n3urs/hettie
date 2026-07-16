@@ -1,0 +1,22 @@
+{
+  "posts": [
+    {
+      "title": "Why I love shore crabs",
+      "slug": "why-i-love-shore-crabs",
+      "date": "2026-07-10",
+      "cover": "",
+      "excerpt": "The humble green shore crab is one of the most successful animals on the Cornish coast — here's why it fascinates me.",
+      "tags": ["crabs", "intertidal"],
+      "body": "The green shore crab (*Carcinus maenas*) is everywhere on the Cornish coast — and that's exactly what makes it so interesting.\n\n## A survivor\n\nThey tolerate huge swings in temperature, salinity and oxygen. That resilience is part of why they've become one of the most widespread invasive species in the world.\n\n## What I'm studying\n\nThis summer I've been running a mark-recapture study to estimate their population in a local estuary. More on that soon.\n\n> This is a placeholder post. Delete it and write your own in the admin panel!"
+    },
+    {
+      "title": "A morning on the rocky shore",
+      "slug": "a-morning-on-the-rocky-shore",
+      "date": "2026-06-21",
+      "cover": "",
+      "excerpt": "Notes from a dawn survey at Gyllyngvase — what the low tide revealed.",
+      "tags": ["field notes", "biodiversity"],
+      "body": "There's nothing quite like a spring low tide at dawn.\n\nWe recorded 17 species across three transects. Here's what stood out and what it tells us about the health of this shore.\n\nWrite your own version of this in the admin — add photos, headings and links."
+    }
+  ]
+}

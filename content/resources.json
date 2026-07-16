@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "title": "NBN Atlas",
+      "category": "Dataset",
+      "url": "https://nbnatlas.org/",
+      "description": "The UK's largest collection of biodiversity records — great for species distributions."
+    },
+    {
+      "title": "MarLIN — Marine Life Information Network",
+      "category": "Reference",
+      "url": "https://www.marlin.ac.uk/",
+      "description": "Species and habitat information for British and Irish marine life."
+    },
+    {
+      "title": "OBIS — Ocean Biodiversity Information System",
+      "category": "Dataset",
+      "url": "https://obis.org/",
+      "description": "Global open-access marine biodiversity data."
+    },
+    {
+      "title": "R for Ecologists (tutorial)",
+      "category": "Tutorial",
+      "url": "",
+      "description": "A helpful intro to analysing ecological data in R. Add your own favourite tutorials here."
+    }
+  ]
+}
