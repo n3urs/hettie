@@ -61,7 +61,7 @@
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     var restDepth = function () {         // resting visible water depth
-      return Math.min(230, window.innerHeight * 0.30);
+      return Math.min(260, window.innerHeight * 0.34);
     };
 
     if (reduce) {
@@ -81,14 +81,14 @@
       var t0 = performance.now();
       var frame = function (now) {
         vel *= 0.9;                       // friction
-        var surge = Math.max(-150, Math.min(180, vel * 0.9));
+        var surge = Math.max(-160, Math.min(190, vel * 0.9));
         var target = restDepth() + surge;
-        target = Math.max(72, Math.min(window.innerHeight * 0.62, target));
+        target = Math.max(88, Math.min(window.innerHeight * 0.62, target));
         current += (target - current) * 0.06;   // the tide lags behind you
 
-        // idle ebb & flow: two slow sines so it never looks mechanical
+        // idle ebb & flow: two overlapping swells so it never looks mechanical
         var t = now - t0;
-        var bob = Math.sin(t / 2400) * 12 + Math.sin(t / 1050) * 4;
+        var bob = Math.sin(t / 1900) * 22 + Math.sin(t / 820) * 7;
 
         ocean.style.transform = "translateY(" + ((current + bob) - OCEAN_H) + "px)";
         requestAnimationFrame(frame);

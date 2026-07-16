@@ -75,9 +75,11 @@ body::before {
   pointer-events: none;
   background-image:
     /* fine grit */
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.52 0 0 0 0 0.40 0 0 0 0 0.20 0 0 0 0.34 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.45 0 0 0 0 0.33 0 0 0 0 0.14 0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"),
+    /* pale shell-fleck shimmer */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='2' stitchTiles='stitch' seed='7'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1 0 0 0 0 0.98 0 0 0 0 0.9 0 0 0 0.5 -0.22'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E"),
     /* soft dune mottling */
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.55 0 0 0 0 0.42 0 0 0 0 0.22 0 0 0 0.16 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.5 0 0 0 0 0.37 0 0 0 0 0.17 0 0 0 0.34 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
 }
 img { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
@@ -193,11 +195,40 @@ button { font-family: inherit; cursor: pointer; }
   position: fixed;
   top: 0; left: 0; right: 0;
   height: 640px;
-  z-index: 35;              /* over the sand & content, under the nav */
+  z-index: 1;               /* behind the page content — text stays readable */
   pointer-events: none;
   will-change: transform;
-  /* resting position before JS takes over (~215px visible) */
-  transform: translateY(-425px);
+  /* resting position before JS takes over (~260px visible) */
+  transform: translateY(-380px);
+}
+/* page content rides above the water */
+main, .site-footer { position: relative; z-index: 2; }
+
+/* the standing title that lives in the water */
+.ocean__title {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: clamp(64px, 9vh, 88px);
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: clamp(20px, 4vw, 40px);
+  color: #fff;
+  text-shadow: 0 2px 22px rgba(6, 56, 66, 0.55), 0 1px 3px rgba(6, 56, 66, 0.35);
+}
+.ocean__name {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(1.8rem, 3.8vw, 2.8rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+.ocean__tag {
+  font-family: var(--font-hand);
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  font-weight: 600;
+  opacity: 0.94;
+  margin-top: 4px;
 }
 
 /* the water itself — top-down turquoise, deep at the top,
@@ -222,41 +253,41 @@ button { font-family: inherit; cursor: pointer; }
   position: absolute;
   top: 0; bottom: 0; left: 0;
   width: calc(100% + 460px);
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='460' height='240'%3E%3Cfilter id='b'%3E%3CfeGaussianBlur stdDeviation='9'/%3E%3C/filter%3E%3Cg filter='url(%23b)' fill='%23ffffff'%3E%3Cellipse cx='80' cy='60' rx='74' ry='11' opacity='0.10'/%3E%3Cellipse cx='300' cy='124' rx='92' ry='13' opacity='0.08'/%3E%3Cellipse cx='180' cy='196' rx='64' ry='10' opacity='0.09'/%3E%3Cellipse cx='402' cy='44' rx='54' ry='9' opacity='0.07'/%3E%3C/g%3E%3C/svg%3E") repeat;
-  animation: slideWisp 26s linear infinite;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='460' height='240'%3E%3Cfilter id='b'%3E%3CfeGaussianBlur stdDeviation='9'/%3E%3C/filter%3E%3Cg filter='url(%23b)' fill='%23ffffff'%3E%3Cellipse cx='80' cy='60' rx='74' ry='11' opacity='0.13'/%3E%3Cellipse cx='300' cy='124' rx='92' ry='13' opacity='0.10'/%3E%3Cellipse cx='180' cy='196' rx='64' ry='10' opacity='0.12'/%3E%3Cellipse cx='402' cy='44' rx='54' ry='9' opacity='0.09'/%3E%3C/g%3E%3C/svg%3E") repeat;
+  animation: slideWisp 17s linear infinite;
 }
 /* soft translucent froth behind the bright foam line */
 .ocean__froth {
   position: absolute;
   left: -60px; right: -60px; bottom: 20px;
-  height: 62px;
+  height: 66px;
   opacity: 0.45;
   overflow: hidden;
-  animation: wash 8s ease-in-out infinite alternate;
+  animation: washFroth 7.5s ease-in-out infinite alternate;
 }
 .ocean__froth::before {
   content: "";
   position: absolute;
   inset: 0 auto 0 0;
   width: calc(100% + 520px);
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 520 84' preserveAspectRatio='none'%3E%3Cpath d='M0 46 Q24 30 48 42 Q76 58 104 38 Q126 22 152 40 Q178 56 208 42 Q236 30 260 44 Q286 58 316 40 Q338 24 366 42 Q392 56 420 44 Q448 32 474 46 Q498 58 520 46 L520 84 L0 84 Z' fill='%23ffffff'/%3E%3C/svg%3E") repeat-x bottom / 520px 84px;
-  animation: slideFroth 21s linear infinite;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 520 84' preserveAspectRatio='none'%3E%3Cpath d='M0 48 Q22 24 46 38 Q72 58 100 32 Q122 12 148 36 Q174 60 204 38 Q232 20 258 42 Q284 62 314 36 Q336 14 364 38 Q390 58 418 40 Q446 24 472 44 Q496 60 520 48 L520 84 L0 84 Z' fill='%23ffffff'/%3E%3C/svg%3E") repeat-x bottom / 520px 84px;
+  animation: slideFroth 16s linear infinite;
 }
 /* the bright irregular foam edge — the waterline */
 .ocean__foam {
   position: absolute;
   left: -60px; right: -60px; bottom: 2px;
-  height: 54px;
+  height: 58px;
   overflow: hidden;
-  animation: wash 6s ease-in-out infinite alternate-reverse;
+  animation: washFoam 5.5s ease-in-out infinite alternate-reverse;
 }
 .ocean__foam::before {
   content: "";
   position: absolute;
   inset: 0 auto 0 0;
   width: calc(100% + 360px);
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 64' preserveAspectRatio='none'%3E%3Cpath d='M0 38 Q18 26 34 34 Q52 46 70 30 Q84 18 102 32 Q118 44 138 36 Q158 26 172 38 Q186 48 208 34 Q224 22 244 36 Q262 46 282 30 Q298 20 318 34 Q336 44 360 38 L360 64 L0 64 Z' fill='%23ffffff'/%3E%3C/svg%3E") repeat-x bottom / 360px 64px;
-  animation: slideFoam 15s linear infinite;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 64' preserveAspectRatio='none'%3E%3Cpath d='M0 40 Q14 18 30 30 Q44 42 58 22 Q70 8 86 26 Q100 42 118 32 Q136 20 150 38 Q162 52 182 32 Q198 12 216 30 Q232 44 250 24 Q262 8 280 26 Q296 44 316 34 Q334 22 346 36 Q354 46 360 40 L360 64 L0 64 Z' fill='%23ffffff'/%3E%3C/svg%3E") repeat-x bottom / 360px 64px;
+  animation: slideFoam 11s linear infinite;
 }
 /* wet sand: darker, just washed, fading down onto the dry beach.
    Rises up over the foam's flat bottom to feather it away. */
@@ -271,10 +302,23 @@ button { font-family: inherit; cursor: pointer; }
     rgba(166, 124, 62, 0.24) 72%,
     rgba(166, 124, 62, 0) 100%);
 }
-@keyframes slideWisp  { to { transform: translateX(-460px); } }
+/* drift loops slide exactly one tile-width; the mid-keyframe adds a
+   vertical dip so the surface visibly rolls, not just slides */
+@keyframes slideWisp  { 50% { transform: translate(-230px, 9px); } to { transform: translate(-460px, 0); } }
 @keyframes slideFroth { to { transform: translateX(-520px); } }
 @keyframes slideFoam  { to { transform: translateX(-360px); } }
-@keyframes wash { from { transform: translateX(-24px); } to { transform: translateX(24px); } }
+/* wash: each foam layer sways sideways AND heaves up/down,
+   out of phase with the other, so the waterline keeps changing shape */
+@keyframes washFroth {
+  0%   { transform: translate(26px, -8px); }
+  45%  { transform: translate(-4px, 7px); }
+  100% { transform: translate(-26px, -5px); }
+}
+@keyframes washFoam {
+  0%   { transform: translate(-28px, -6px); }
+  55%  { transform: translate(4px, 9px); }
+  100% { transform: translate(28px, -4px); }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .ocean__water::before, .ocean__froth, .ocean__froth::before,
@@ -362,7 +406,7 @@ button { font-family: inherit; cursor: pointer; }
 
 /* ---------- hero (starts below the resting waterline) ---------- */
 .hero {
-  padding-top: clamp(200px, 26vh, 280px);
+  padding-top: clamp(235px, 32vh, 320px);
   padding-bottom: clamp(48px, 8vw, 84px);
 }
 .hero-grid {
@@ -717,7 +761,7 @@ button { font-family: inherit; cursor: pointer; }
 
 /* ---------- blog list / post ---------- */
 .post-hero {
-  padding-top: clamp(200px, 26vh, 260px);
+  padding-top: clamp(235px, 32vh, 300px);
   padding-bottom: clamp(40px, 7vw, 64px);
 }
 .post-hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); letter-spacing: -0.02em; line-height: 1.08; margin-bottom: 14px; }
