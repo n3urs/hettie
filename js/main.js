@@ -81,14 +81,18 @@
       var t0 = performance.now();
       var frame = function (now) {
         vel *= 0.9;                       // friction
-        var surge = Math.max(-160, Math.min(190, vel * 0.9));
+        // the waterline stays roughly put: only a small nudge with scroll
+        var surge = Math.max(-26, Math.min(30, vel * 0.25));
         var target = restDepth() + surge;
-        target = Math.max(88, Math.min(window.innerHeight * 0.62, target));
-        current += (target - current) * 0.06;   // the tide lags behind you
+        current += (target - current) * 0.06;
 
-        // idle ebb & flow: two overlapping swells so it never looks mechanical
+        // scroll energy makes the sea livelier without moving it:
+        // bigger, quicker swells while you're scrolling, calm at rest
+        var energy = Math.min(1, Math.abs(vel) / 260);
         var t = now - t0;
-        var bob = Math.sin(t / 1900) * 22 + Math.sin(t / 820) * 7;
+        var bob = Math.sin(t / 1900) * (20 + energy * 18)
+                + Math.sin(t / 820)  * (6 + energy * 14)
+                + Math.sin(t / 460)  * (energy * 8);
 
         ocean.style.transform = "translateY(" + ((current + bob) - OCEAN_H) + "px)";
         requestAnimationFrame(frame);

@@ -195,14 +195,12 @@ button { font-family: inherit; cursor: pointer; }
   position: fixed;
   top: 0; left: 0; right: 0;
   height: 640px;
-  z-index: 1;               /* behind the page content — text stays readable */
+  z-index: 30;              /* over the page — content scrolls under the sea */
   pointer-events: none;
   will-change: transform;
   /* resting position before JS takes over (~260px visible) */
   transform: translateY(-380px);
 }
-/* page content rides above the water */
-main, .site-footer { position: relative; z-index: 2; }
 
 /* the standing title that lives in the water */
 .ocean__title {
