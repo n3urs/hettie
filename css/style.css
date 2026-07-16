@@ -52,6 +52,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html {
   scroll-behavior: smooth;
+  overscroll-behavior-y: none;  /* no rubber-band yank on the fixed sea */
   /* the beach: warm sand (painted on the root so the speckle
      overlay below can sit behind content but above nothing) */
   background: linear-gradient(180deg, var(--sand-1), #f4e6c8 55%, var(--sand-2));
@@ -194,13 +195,22 @@ button { font-family: inherit; cursor: pointer; }
 .ocean {
   position: fixed;
   top: 0; left: 0; right: 0;
-  height: 640px;
+  height: 115vh;            /* tall enough to flood the whole screen */
+  min-height: 640px;
   z-index: 30;              /* over the page — content scrolls under the sea */
   pointer-events: none;
   will-change: transform;
   /* resting position before JS takes over (~260px visible) */
-  transform: translateY(-380px);
+  transform: translateY(calc(260px - 115vh));
 }
+/* layer order: water → wet sand → froth → foam → title → contact card,
+   so the wet-sand tint never paints over the white waves */
+.ocean__water { z-index: 1; }
+.ocean__wet   { z-index: 2; }
+.ocean__froth { z-index: 3; }
+.ocean__foam  { z-index: 4; }
+.ocean__title { z-index: 5; }
+.ocean__contact { z-index: 6; }
 
 /* the standing title that lives in the water */
 .ocean__title {
@@ -229,6 +239,49 @@ button { font-family: inherit; cursor: pointer; }
   margin-top: 4px;
 }
 
+/* the flood finale: when you reach the bottom of the page the tide
+   floods the screen and this card floats in on the water */
+.ocean__contact {
+  position: absolute;
+  left: 20px; right: 20px;
+  bottom: 56vh;
+  margin-inline: auto;
+  max-width: 560px;
+  background: var(--paper);
+  border-radius: var(--radius-lg);
+  padding: clamp(26px, 4vw, 40px);
+  box-shadow: 0 46px 120px -34px rgba(4, 44, 52, 0.65);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(46px) scale(0.95);
+  transition: opacity 0.45s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0s linear 0.45s;
+}
+.ocean--flooded .ocean__contact {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  pointer-events: auto;
+  transition-delay: 0s;
+  animation: floatCard 5.5s ease-in-out 0.9s infinite alternate;
+}
+@keyframes floatCard {
+  from { transform: translateY(0) rotate(0deg); }
+  to   { transform: translateY(-12px) rotate(-0.4deg); }
+}
+.ocean__contact h3 {
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+.ocean__contact p {
+  color: var(--mute);
+  margin-bottom: 18px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ocean--flooded .ocean__contact { animation: none; }
+}
+
 /* the water itself — top-down turquoise, deep at the top,
    pale where it thins out near the foam edge */
 .ocean__water {
@@ -238,11 +291,11 @@ button { font-family: inherit; cursor: pointer; }
     radial-gradient(720px 260px at 82% 55%, rgba(255, 244, 214, 0.15), transparent 60%),
     linear-gradient(180deg,
       #077a92 0%,
-      #0c8f9f 58%,
-      #14a9ab 73%,
-      #2abcb2 82%,
-      #5ccfbf 90%,
-      #a5e6d2 96%,
+      #0c8f9f 50%,
+      #14a9ab 68%,
+      #2abcb2 78%,
+      #5ccfbf 87%,
+      #a5e6d2 94%,
       #ecdfc2 100%);
 }
 /* drifting white wisps — surface swirl on the water */
