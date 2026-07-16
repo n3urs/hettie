@@ -50,4 +50,50 @@
   window.__revealObserve = function (el) {
     if (el) { el.classList.add("in"); }
   };
+
+  // ----- the tide -----
+  // A fixed ocean band sits over the top of the viewport. At rest it
+  // gently ebbs and flows. Scroll down and the tide surges down the
+  // page after you; scroll up and it retreats. Transform-only = GPU.
+  var ocean = document.getElementById("oceanBand");
+  if (ocean) {
+    var OCEAN_H = 640;                    // matches .ocean height in CSS
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    var restDepth = function () {         // resting visible water depth
+      return Math.min(230, window.innerHeight * 0.30);
+    };
+
+    if (reduce) {
+      // no motion: park the waterline at its resting depth
+      ocean.style.transform = "translateY(" + (restDepth() - OCEAN_H) + "px)";
+    } else {
+      var current = restDepth();
+      var vel = 0;
+      var lastY = window.scrollY;
+
+      window.addEventListener("scroll", function () {
+        var y = window.scrollY;
+        vel += y - lastY;                 // signed: down = in, up = out
+        lastY = y;
+      }, { passive: true });
+
+      var t0 = performance.now();
+      var frame = function (now) {
+        vel *= 0.9;                       // friction
+        var surge = Math.max(-150, Math.min(180, vel * 0.9));
+        var target = restDepth() + surge;
+        target = Math.max(72, Math.min(window.innerHeight * 0.62, target));
+        current += (target - current) * 0.06;   // the tide lags behind you
+
+        // idle ebb & flow: two slow sines so it never looks mechanical
+        var t = now - t0;
+        var bob = Math.sin(t / 2400) * 12 + Math.sin(t / 1050) * 4;
+
+        ocean.style.transform = "translateY(" + ((current + bob) - OCEAN_H) + "px)";
+        requestAnimationFrame(frame);
+      };
+      requestAnimationFrame(frame);
+    }
+  }
 })();
