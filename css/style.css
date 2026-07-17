@@ -209,14 +209,16 @@ button { font-family: inherit; cursor: pointer; }
 .ocean__wet   { z-index: 2; }
 .ocean__froth { z-index: 3; }
 .ocean__foam  { z-index: 4; }
-.ocean__title { z-index: 5; }
 .ocean__contact { z-index: 6; }
 
-/* the standing title that lives in the water */
+/* the standing title — pinned near the top of the viewport, in the
+   water at rest, and it STAYS at the top when the tide floods */
 .ocean__title {
-  position: absolute;
+  position: fixed;
   left: 0; right: 0;
-  bottom: clamp(30px, 4.5vh, 44px);
+  top: clamp(76px, 11vh, 94px);
+  z-index: 31;              /* above the water band, below the nav */
+  pointer-events: none;
   max-width: var(--container);
   margin-inline: auto;
   padding-inline: clamp(20px, 4vw, 40px);
@@ -310,8 +312,8 @@ button { font-family: inherit; cursor: pointer; }
 /* soft translucent froth behind the bright foam line */
 .ocean__froth {
   position: absolute;
-  left: -60px; right: -60px; bottom: 20px;
-  height: 66px;
+  left: -60px; right: -60px; bottom: 0;
+  height: 86px;   /* deep white fill — always overlaps behind the foam */
   opacity: 0.45;
   overflow: hidden;
   animation: washFroth 7.5s ease-in-out infinite alternate;
@@ -361,14 +363,14 @@ button { font-family: inherit; cursor: pointer; }
 /* wash: each foam layer sways sideways AND heaves up/down,
    out of phase with the other, so the waterline keeps changing shape */
 @keyframes washFroth {
-  0%   { transform: translate(26px, -8px); }
-  45%  { transform: translate(-4px, 7px); }
-  100% { transform: translate(-26px, -5px); }
+  0%   { transform: translate(26px, -4px); }
+  45%  { transform: translate(-4px, 4px); }
+  100% { transform: translate(-26px, -3px); }
 }
 @keyframes washFoam {
-  0%   { transform: translate(-28px, -6px); }
-  55%  { transform: translate(4px, 9px); }
-  100% { transform: translate(28px, -4px); }
+  0%   { transform: translate(-28px, -4px); }
+  55%  { transform: translate(4px, 5px); }
+  100% { transform: translate(28px, -3px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
