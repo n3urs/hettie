@@ -62,7 +62,7 @@
     window.addEventListener("resize", function () { oceanH = ocean.offsetHeight; });
 
     var restDepth = function () {         // resting visible water depth
-      return Math.min(260, window.innerHeight * 0.34);
+      return Math.min(190, window.innerHeight * 0.26);
     };
 
     // how close we are to the bottom of the page (0 → 1 over the
@@ -118,9 +118,9 @@
         // bigger, quicker swells while you're scrolling, calm at rest
         var energy = Math.min(1, Math.abs(vel) / 260);
         var t = now - t0;
-        var bob = Math.sin(t / 1900) * (20 + energy * 18)
-                + Math.sin(t / 820)  * (6 + energy * 14)
-                + Math.sin(t / 460)  * (energy * 8);
+        var bob = Math.sin(t / 1900) * (14 + energy * 16)
+                + Math.sin(t / 820)  * (5 + energy * 12)
+                + Math.sin(t / 460)  * (energy * 7);
 
         ocean.style.transform = "translateY(" + ((current + bob) - oceanH) + "px)";
         requestAnimationFrame(frame);

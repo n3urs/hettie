@@ -200,8 +200,8 @@ button { font-family: inherit; cursor: pointer; }
   z-index: 30;              /* over the page — content scrolls under the sea */
   pointer-events: none;
   will-change: transform;
-  /* resting position before JS takes over (~260px visible) */
-  transform: translateY(calc(260px - 115vh));
+  /* resting position before JS takes over (~190px visible) */
+  transform: translateY(calc(190px - 115vh));
 }
 /* layer order: water → wet sand → froth → foam → title → contact card,
    so the wet-sand tint never paints over the white waves */
@@ -216,7 +216,7 @@ button { font-family: inherit; cursor: pointer; }
 .ocean__title {
   position: absolute;
   left: 0; right: 0;
-  bottom: clamp(64px, 9vh, 88px);
+  bottom: clamp(30px, 4.5vh, 44px);
   max-width: var(--container);
   margin-inline: auto;
   padding-inline: clamp(20px, 4vw, 40px);
@@ -227,16 +227,16 @@ button { font-family: inherit; cursor: pointer; }
   font-family: var(--font-display);
   font-style: italic;
   font-weight: 600;
-  font-size: clamp(1.8rem, 3.8vw, 2.8rem);
+  font-size: clamp(1.45rem, 2.8vw, 2.1rem);
   line-height: 1.05;
   letter-spacing: -0.01em;
 }
 .ocean__tag {
   font-family: var(--font-hand);
-  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  font-size: clamp(0.98rem, 1.4vw, 1.15rem);
   font-weight: 600;
   opacity: 0.94;
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 /* the flood finale: when you reach the bottom of the page the tide
@@ -457,7 +457,7 @@ button { font-family: inherit; cursor: pointer; }
 
 /* ---------- hero (starts below the resting waterline) ---------- */
 .hero {
-  padding-top: clamp(235px, 32vh, 320px);
+  padding-top: clamp(175px, 24vh, 240px);
   padding-bottom: clamp(48px, 8vw, 84px);
 }
 .hero-grid {
@@ -812,7 +812,7 @@ button { font-family: inherit; cursor: pointer; }
 
 /* ---------- blog list / post ---------- */
 .post-hero {
-  padding-top: clamp(235px, 32vh, 300px);
+  padding-top: clamp(175px, 24vh, 230px);
   padding-bottom: clamp(40px, 7vw, 64px);
 }
 .post-hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); letter-spacing: -0.02em; line-height: 1.08; margin-bottom: 14px; }
