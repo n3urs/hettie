@@ -62,8 +62,25 @@
     window.addEventListener("resize", function () { oceanH = ocean.offsetHeight; });
 
     var restDepth = function () {         // resting visible water depth
-      return Math.min(190, window.innerHeight * 0.26);
+      return Math.min(240, window.innerHeight * 0.30);
     };
+
+    // Her name lives in the hero at the top of the home page, so the
+    // water only takes it over once you've scrolled past — no doubling.
+    // On other pages the water carries the name straight away.
+    var oceanTitle = document.querySelector(".ocean__title");
+    var hero = document.querySelector(".hero");
+    var isHome = !!document.getElementById("oceanEnd");
+    var syncTitle = function () {
+      if (!oceanTitle) return;
+      var show = !isHome || !hero
+        ? window.scrollY > 40
+        : window.scrollY > hero.offsetHeight * 0.6;
+      oceanTitle.classList.toggle("shows-name", show);
+    };
+    window.addEventListener("scroll", syncTitle, { passive: true });
+    window.addEventListener("resize", syncTitle);
+    syncTitle();
 
     // the end screen only exists on the home page — no flood without it
     var endScreen = document.getElementById("oceanEnd");

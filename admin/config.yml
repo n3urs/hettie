@@ -25,7 +25,8 @@ collections:
         file: "content/home.json"
         format: json
         fields:
-          - { label: "Heading", name: "heading", widget: "string", hint: "Wrap words in *stars* to give them the coloured accent." }
+          - { label: "Your name (big heading)", name: "heading", widget: "string", hint: "Wrap words in *stars* to give them the coloured accent." }
+          - { label: "What you study", name: "study", widget: "string", hint: "Shown just under your name, e.g. MSc Marine Biology · University of Exeter, Penryn" }
           - { label: "Intro paragraph", name: "intro", widget: "text" }
           - { label: "Career goals", name: "goals", widget: "text" }
           - { label: "Your photo", name: "photo", widget: "image", required: false }

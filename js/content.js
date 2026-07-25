@@ -38,6 +38,7 @@
   get("content/home.json").then(function (d) {
     if (!d) return;
     if (d.heading) set("home", "heading", md.render(d.heading).replace(/^<p>|<\/p>$/g, ""));
+    if (d.study) set("home", "study", esc(d.study));
     if (d.intro) set("home", "intro", esc(d.intro));
     if (d.goals) set("home", "goals", esc(d.goals));
     if (d.photo) {

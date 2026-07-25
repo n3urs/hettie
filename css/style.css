@@ -135,7 +135,7 @@ button { font-family: inherit; cursor: pointer; }
   letter-spacing: -0.01em;
   color: var(--deep);
 }
-.brand svg { width: 36px; height: 36px; flex: none; transform: rotate(-6deg); }
+.brand svg { width: 54px; height: 54px; flex: none; transform: rotate(-6deg); }
 .brand b { font-weight: 700; }
 .nav-links { display: flex; align-items: center; gap: clamp(10px, 2vw, 26px); }
 .nav-links a {
@@ -224,19 +224,31 @@ button { font-family: inherit; cursor: pointer; }
   color: #fff;
   text-shadow: 0 2px 22px rgba(6, 56, 66, 0.55), 0 1px 3px rgba(6, 56, 66, 0.35);
 }
+/* her name in the water — same face as the hero headline (Hettie's pick),
+   bigger and cleaner than the old italic serif. Hidden at the very top,
+   where the hero owns the name, then it fades in as you scroll. */
 .ocean__name {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 600;
-  font-size: clamp(1.45rem, 2.8vw, 2.1rem);
-  line-height: 1.05;
-  letter-spacing: -0.01em;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.4s ease, max-height 0.5s ease, transform 0.5s ease;
+}
+.ocean__title.shows-name .ocean__name {
+  opacity: 1;
+  max-height: 7rem;
+  transform: none;
 }
 .ocean__tag {
   font-family: var(--font-hand);
-  font-size: clamp(0.98rem, 1.4vw, 1.15rem);
+  font-size: clamp(1.1rem, 1.9vw, 1.4rem);
   font-weight: 600;
-  opacity: 0.94;
+  opacity: 0.96;
   margin-top: 2px;
 }
 
@@ -486,21 +498,30 @@ body.is-flooded .ocean__end {
   padding-top: clamp(175px, 24vh, 240px);
   padding-bottom: clamp(48px, 8vw, 84px);
 }
+/* wider writing column, photo pushed over to the right */
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: clamp(30px, 5vw, 64px);
+  grid-template-columns: 1.45fr 0.55fr;
+  gap: clamp(34px, 6vw, 78px);
   align-items: center;
   position: relative;
   z-index: 2;
 }
 .hero h1 {
   font-weight: 800;
-  font-size: clamp(2.3rem, 6vw, 3.9rem);
-  line-height: 1.04;
-  letter-spacing: -0.03em;
-  margin-bottom: 20px;
+  font-size: clamp(2.7rem, 7.4vw, 4.6rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  margin-bottom: 10px;
   color: var(--ink);
+}
+/* what she studies, straight under her name */
+.hero-study {
+  font-weight: 600;
+  font-size: clamp(1.05rem, 1.9vw, 1.3rem);
+  letter-spacing: -0.005em;
+  color: var(--deep);
+  margin-bottom: 20px;
 }
 .hero p.lead {
   font-size: clamp(1.05rem, 1.8vw, 1.2rem);
@@ -524,6 +545,8 @@ body.is-flooded .ocean__end {
 /* the hero photo — a polaroid pinned with washi tape */
 .hero-media {
   position: relative;
+  margin-left: auto;          /* sit against the right edge */
+  width: 100%;
   background: #fff;
   padding: 14px 14px 52px;
   border-radius: 6px;
