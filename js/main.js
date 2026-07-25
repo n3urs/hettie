@@ -69,12 +69,13 @@
     var endScreen = document.getElementById("oceanEnd");
 
     // how close we are to the bottom of the page (0 → 1 over the
-    // last 520px of scroll) — drives the flood finale
+    // last 460px of scroll) — drives the flood finale
+    var FLOOD_RUN = 460;
     var floodProgress = function (y) {
       if (!endScreen) return 0;
       var max = document.documentElement.scrollHeight - window.innerHeight;
-      if (max < 700) return 0;            // page too short to flood
-      var f = (y - (max - 520)) / 520;
+      if (max < 400) return 0;            // page too short to flood
+      var f = (y - (max - FLOOD_RUN)) / FLOOD_RUN;
       f = Math.max(0, Math.min(1, f));
       return f * f * (3 - 2 * f);         // smoothstep
     };
@@ -84,15 +85,21 @@
       document.body.classList.toggle("is-flooded", on);
     };
 
+    // The end screen is toggled straight from the scroll event, NOT from
+    // the animation loop — browsers throttle rAF (background tabs, low
+    // power mode), and the finale must never depend on that.
+    var syncFlood = function () {
+      // the card rises with the water rather than waiting for it
+      setFlooded(floodProgress(Math.max(0, window.scrollY)) > 0.35);
+    };
+    window.addEventListener("scroll", syncFlood, { passive: true });
+    window.addEventListener("resize", syncFlood);
+    syncFlood();
+
     if (reduce) {
       // no motion: park the waterline at its resting depth
+      // (syncFlood above still reveals the end screen at the bottom)
       ocean.style.transform = "translateY(" + (restDepth() - oceanH) + "px)";
-      // still show the end screen at the bottom of the page
-      var onScrollRM = function () {
-        setFlooded(floodProgress(Math.max(0, window.scrollY)) > 0.5);
-      };
-      window.addEventListener("scroll", onScrollRM, { passive: true });
-      onScrollRM();
     } else {
       var current = restDepth();
       var vel = 0;
@@ -118,7 +125,6 @@
           var floodDepth = window.innerHeight * 1.06;
           target = target + (floodDepth - target) * flood;
         }
-        setFlooded(flood > 0.5);
 
         current += (target - current) * 0.06;
 

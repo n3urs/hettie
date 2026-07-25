@@ -244,7 +244,7 @@ button { font-family: inherit; cursor: pointer; }
    Scrolling through it brings the tide in. It holds no content of its
    own, so nothing is duplicated behind the end screen. */
 .tide-zone {
-  min-height: 100vh;
+  min-height: 62vh;
   display: grid;
   place-items: center;
   text-align: center;
