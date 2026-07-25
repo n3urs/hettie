@@ -209,7 +209,6 @@ button { font-family: inherit; cursor: pointer; }
 .ocean__wet   { z-index: 2; }
 .ocean__froth { z-index: 3; }
 .ocean__foam  { z-index: 4; }
-.ocean__contact { z-index: 6; }
 
 /* the standing title — pinned near the top of the viewport, in the
    water at rest, and it STAYS at the top when the tide floods */
@@ -241,47 +240,72 @@ button { font-family: inherit; cursor: pointer; }
   margin-top: 2px;
 }
 
-/* the flood finale: when you reach the bottom of the page the tide
-   floods the screen and this card floats in on the water */
-.ocean__contact {
-  position: absolute;
-  left: 20px; right: 20px;
-  bottom: 56vh;
+/* ---------- the tide zone: empty runway at the end of the page ----------
+   Scrolling through it brings the tide in. It holds no content of its
+   own, so nothing is duplicated behind the end screen. */
+.tide-zone {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+.tide-zone__cue {
+  font-family: var(--font-hand);
+  font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+  color: var(--soft);
+  transition: opacity 0.5s ease;
+}
+.tide-zone__cue span { display: block; font-size: 1.8rem; margin-top: 6px; }
+body.is-flooded .tide-zone__cue { opacity: 0; }
+
+/* ---------- the end screen: the last thing you see ----------
+   Fixed to the viewport (not the water band) so it settles cleanly
+   in the middle of the flooded screen instead of sliding with the tide. */
+.ocean__end {
+  position: fixed;
+  z-index: 32;                 /* above the water, beside the pinned title */
+  left: 0; right: 0;
+  top: 50%;
   margin-inline: auto;
-  max-width: 560px;
+  width: min(560px, calc(100% - 40px));
   background: var(--paper);
   border-radius: var(--radius-lg);
-  padding: clamp(26px, 4vw, 40px);
+  padding: clamp(28px, 4vw, 42px);
+  text-align: center;
   box-shadow: 0 46px 120px -34px rgba(4, 44, 52, 0.65);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(46px) scale(0.95);
-  transition: opacity 0.45s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-              visibility 0s linear 0.45s;
+  transform: translateY(-42%) scale(0.96);
+  transition: opacity 0.5s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0s linear 0.5s;
 }
-.ocean--flooded .ocean__contact {
+body.is-flooded .ocean__end {
   opacity: 1;
   visibility: visible;
-  transform: none;
+  transform: translateY(-50%) scale(1);
   pointer-events: auto;
   transition-delay: 0s;
-  animation: floatCard 5.5s ease-in-out 0.9s infinite alternate;
 }
-@keyframes floatCard {
-  from { transform: translateY(0) rotate(0deg); }
-  to   { transform: translateY(-12px) rotate(-0.4deg); }
-}
-.ocean__contact h3 {
-  font-size: clamp(1.6rem, 3vw, 2.1rem);
+.ocean__end .eyebrow { justify-content: center; }
+.ocean__end .eyebrow::before { display: none; }
+.ocean__end h2 {
+  font-size: clamp(1.9rem, 3.6vw, 2.5rem);
   letter-spacing: -0.02em;
-  margin-bottom: 8px;
+  line-height: 1.1;
+  margin-bottom: 10px;
 }
-.ocean__contact p {
+.ocean__end p.end-lead {
   color: var(--mute);
-  margin-bottom: 18px;
+  max-width: 40ch;
+  margin: 0 auto 22px;
 }
-@media (prefers-reduced-motion: reduce) {
-  .ocean--flooded .ocean__contact { animation: none; }
+.ocean__end .contact-links { justify-content: center; }
+.end-credit {
+  margin-top: 26px;
+  padding-top: 18px;
+  border-top: 1px dashed var(--line);
+  font-size: 0.85rem;
+  color: var(--soft);
 }
 
 /* the water itself — top-down turquoise, deep at the top,

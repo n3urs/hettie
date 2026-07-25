@@ -65,23 +65,31 @@
       return Math.min(190, window.innerHeight * 0.26);
     };
 
+    // the end screen only exists on the home page — no flood without it
+    var endScreen = document.getElementById("oceanEnd");
+
     // how close we are to the bottom of the page (0 → 1 over the
-    // last 480px of scroll) — drives the flood finale
+    // last 520px of scroll) — drives the flood finale
     var floodProgress = function (y) {
+      if (!endScreen) return 0;
       var max = document.documentElement.scrollHeight - window.innerHeight;
       if (max < 700) return 0;            // page too short to flood
-      var f = (y - (max - 480)) / 480;
+      var f = (y - (max - 520)) / 520;
       f = Math.max(0, Math.min(1, f));
       return f * f * (3 - 2 * f);         // smoothstep
+    };
+
+    var setFlooded = function (on) {
+      ocean.classList.toggle("ocean--flooded", on);
+      document.body.classList.toggle("is-flooded", on);
     };
 
     if (reduce) {
       // no motion: park the waterline at its resting depth
       ocean.style.transform = "translateY(" + (restDepth() - oceanH) + "px)";
-      // still show the contact card at the bottom of the page
+      // still show the end screen at the bottom of the page
       var onScrollRM = function () {
-        ocean.classList.toggle("ocean--flooded",
-          floodProgress(Math.max(0, window.scrollY)) > 0.5);
+        setFlooded(floodProgress(Math.max(0, window.scrollY)) > 0.5);
       };
       window.addEventListener("scroll", onScrollRM, { passive: true });
       onScrollRM();
@@ -110,7 +118,7 @@
           var floodDepth = window.innerHeight * 1.06;
           target = target + (floodDepth - target) * flood;
         }
-        ocean.classList.toggle("ocean--flooded", flood > 0.5);
+        setFlooded(flood > 0.5);
 
         current += (target - current) * 0.06;
 

@@ -27,16 +27,19 @@
     <div class="ocean__froth" aria-hidden="true"></div>
     <div class="ocean__foam" aria-hidden="true"></div>
     <div class="ocean__wet" aria-hidden="true"></div>
-    <div class="ocean__contact">
-      <span class="eyebrow">The tide's in 🌊</span>
-      <h3>Let's <span class="grad-serif">talk</span></h3>
-      <p>Interested in collaborating, or just want to chat marine ecology? Get in touch.</p>
-      <div class="contact-links" id="floodLinks"></div>
-    </div>
   </div>
   <div class="ocean__title">
     <p class="ocean__name">Hettie Rankin</p>
     <p class="ocean__tag">Marine Biology · University of Exeter, Penryn</p>
+  </div>
+
+  <!-- ===================== END SCREEN ===================== -->
+  <div class="ocean__end" id="oceanEnd">
+    <span class="eyebrow">The tide's in</span>
+    <h2>Let's <span class="grad-serif">talk</span></h2>
+    <p class="end-lead" data-contact="blurb">Interested in collaborating, or just want to chat marine ecology? Get in touch.</p>
+    <div class="contact-links" id="floodLinks"></div>
+    <p class="end-credit">© <span data-site="year"></span> Hettie Rankin · Made with 🦀 in Cornwall</p>
   </div>
 
   <!-- ===================== HEADER ===================== -->
@@ -153,26 +156,13 @@
       </div>
     </section>
 
-    <!-- ===================== CONTACT ===================== -->
-    <section class="section" id="contact">
-      <div class="container">
-        <div class="panel reveal">
-          <span class="eyebrow">Get in touch</span>
-          <h2 class="section-title">Let's <span class="grad-serif">talk</span></h2>
-          <p class="section-sub" data-contact="blurb"></p>
-          <div class="contact-links" data-render="contact"></div>
-        </div>
-      </div>
+    <!-- ============ TIDE ZONE — the runway that brings the sea in ============
+         Deliberately empty: the end screen below is the only contact UI,
+         so nothing is duplicated underneath the water. -->
+    <section class="section tide-zone" id="contact">
+      <p class="tide-zone__cue">keep going — the tide's coming in<span>🌊</span></p>
     </section>
   </main>
-
-  <!-- ===================== FOOTER ===================== -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <span class="brand"><b data-site="footerName">Hettie</b> · Marine Biologist</span>
-      <span>© <span data-site="year"></span> · Made with 🦀 in Cornwall</span>
-    </div>
-  </footer>
 
   <!-- ===================== GALLERY MODAL ===================== -->
   <div class="modal" id="galleryModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">

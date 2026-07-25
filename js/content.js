@@ -134,19 +134,10 @@
   });
 
   // ---------- CONTACT ----------
+  // Only the intro line lives in the page; the links are rendered onto
+  // the end screen by main.js, so there's one source of truth.
   get("content/contact.json").then(function (d) {
-    if (!d) return;
-    if (d.blurb) set("contact", "blurb", esc(d.blurb));
-    var el = target("contact");
-    var links = [];
-    if (d.email) links.push({ label: d.email, url: "mailto:" + d.email, icon: "✉️" });
-    if (d.linkedin) links.push({ label: "LinkedIn", url: d.linkedin, icon: "in" });
-    (d.links || []).forEach(function (l) { if (l.url) links.push({ label: l.label || l.url, url: l.url, icon: "↗" }); });
-    if (!links.length) { empty(el, "Contact details will appear here."); return; }
-    el.innerHTML = links.map(function (l) {
-      return '<a href="' + esc(l.url) + '"' + (l.url.indexOf("mailto:") === 0 ? "" : ' target="_blank" rel="noopener"') + '>' +
-        '<span aria-hidden="true">' + esc(l.icon) + '</span>' + esc(l.label) + '</a>';
-    }).join("");
+    if (d && d.blurb) set("contact", "blurb", esc(d.blurb));
   });
 
   // ---------- MODAL ----------
