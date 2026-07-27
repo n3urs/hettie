@@ -9,8 +9,10 @@ backend:
   name: git-gateway
   branch: main
 
-# Uncomment for local testing without Netlify (run: npx decap-server), then visit /admin
-# local_backend: true
+# Local testing without Netlify: run `npx decap-server` alongside the site,
+# then open /admin. Decap only honours this when the page is served from
+# localhost, so it's inert on the live site and safe to leave switched on.
+local_backend: true
 
 media_folder: "assets/uploads"   # where uploaded images are stored in the repo
 public_folder: "/assets/uploads" # the path used on the live site
