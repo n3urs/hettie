@@ -1,5 +1,9 @@
 # Decap CMS configuration — the admin panel Hettie uses.
 # Content is stored as JSON files in /content and committed to the repo via Git Gateway.
+#
+# Collections are ordered by how often she'll need them: the day-to-day
+# things (posts, photos, notes) sit at the top, and the write-it-once
+# setup text is further down the list.
 
 backend:
   name: git-gateway
@@ -16,99 +20,6 @@ display_url: /
 logo_url: /assets/crab.svg
 
 collections:
-  # ---------------- HOME ----------------
-  - name: "home"
-    label: "🏠 Home page"
-    files:
-      - name: "home"
-        label: "Home / intro"
-        file: "content/home.json"
-        format: json
-        fields:
-          - { label: "Your name (big heading)", name: "heading", widget: "string", hint: "Wrap words in *stars* to give them the coloured accent." }
-          - { label: "What you study", name: "study", widget: "string", hint: "Shown just under your name, e.g. MSc Marine Biology · University of Exeter, Penryn" }
-          - { label: "Intro paragraph", name: "intro", widget: "text" }
-          - { label: "Career goals", name: "goals", widget: "text" }
-          - { label: "Your photo", name: "photo", widget: "image", required: false }
-
-  # ---------------- ABOUT ----------------
-  - name: "about"
-    label: "👤 About / CV"
-    files:
-      - name: "about"
-        label: "About me"
-        file: "content/about.json"
-        format: json
-        fields:
-          - { label: "Section title", name: "title", widget: "string" }
-          - { label: "Your story", name: "bio", widget: "markdown" }
-          - { label: "Skills", name: "skills", widget: "list", required: false, hint: "One skill per item." }
-          - { label: "CV button label", name: "cvLabel", widget: "string", required: false }
-          - { label: "CV file / link", name: "cvUrl", widget: "file", required: false, hint: "Upload a PDF or paste a link." }
-          - { label: "'At a glance' title", name: "glanceTitle", widget: "string", required: false }
-          - { label: "'At a glance' text", name: "glance", widget: "markdown", required: false }
-
-  # ---------------- RESEARCH ----------------
-  - name: "research"
-    label: "🔬 Research portfolio"
-    files:
-      - name: "research"
-        label: "Research projects"
-        file: "content/research.json"
-        format: json
-        fields:
-          - label: "Projects"
-            name: "items"
-            widget: "list"
-            summary: "{{fields.title}}"
-            fields:
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, required: false }
-              - { label: "Cover image", name: "cover", widget: "image", required: false }
-              - { label: "Summary", name: "summary", widget: "text", required: false }
-              - { label: "Link (optional)", name: "link", widget: "string", required: false }
-              - { label: "Link label", name: "linkLabel", widget: "string", required: false }
-
-  # ---------------- FIELD NOTES ----------------
-  - name: "fieldnotes"
-    label: "🐚 Field notes"
-    files:
-      - name: "fieldnotes"
-        label: "Field notes"
-        file: "content/fieldnotes.json"
-        format: json
-        fields:
-          - label: "Notes"
-            name: "items"
-            widget: "list"
-            summary: "{{fields.date}} — {{fields.location}}"
-            fields:
-              - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, required: false }
-              - { label: "Location", name: "location", widget: "string", required: false }
-              - { label: "Species (shown in italics)", name: "species", widget: "string", required: false }
-              - { label: "Photo", name: "photo", widget: "image", required: false }
-              - { label: "Note", name: "note", widget: "text", required: false }
-
-  # ---------------- GALLERY ----------------
-  - name: "gallery"
-    label: "📸 Interactive gallery"
-    files:
-      - name: "gallery"
-        label: "Gallery photos"
-        file: "content/gallery.json"
-        format: json
-        fields:
-          - label: "Photos"
-            name: "items"
-            widget: "list"
-            summary: "{{fields.title}}"
-            fields:
-              - { label: "Photo", name: "image", widget: "image" }
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, required: false }
-              - { label: "Location", name: "location", widget: "string", required: false }
-              - { label: "The experience (shown when clicked)", name: "experience", widget: "markdown" }
-
   # ---------------- BLOG ----------------
   - name: "blog"
     label: "📝 Blog posts"
@@ -130,6 +41,99 @@ collections:
               - { label: "Short excerpt", name: "excerpt", widget: "text", required: false }
               - { label: "Tags", name: "tags", widget: "list", required: false }
               - { label: "Body", name: "body", widget: "markdown" }
+
+  # ---------------- GALLERY ----------------
+  - name: "gallery"
+    label: "📸 Photo gallery"
+    files:
+      - name: "gallery"
+        label: "Gallery photos"
+        file: "content/gallery.json"
+        format: json
+        fields:
+          - label: "Photos"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Photo", name: "image", widget: "image" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, required: false }
+              - { label: "Location", name: "location", widget: "string", required: false }
+              - { label: "The experience (shown when clicked)", name: "experience", widget: "markdown" }
+
+  # ---------------- FIELD NOTES ----------------
+  - name: "fieldnotes"
+    label: "🐚 Field notes"
+    files:
+      - name: "fieldnotes"
+        label: "Field notes"
+        file: "content/fieldnotes.json"
+        format: json
+        fields:
+          - label: "Notes"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.date}} — {{fields.location}}"
+            fields:
+              - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, required: false }
+              - { label: "Location", name: "location", widget: "string", required: false }
+              - { label: "Species (shown in italics)", name: "species", widget: "string", required: false }
+              - { label: "Photo", name: "photo", widget: "image", required: false }
+              - { label: "Note", name: "note", widget: "text", required: false }
+
+  # ---------------- RESEARCH ----------------
+  - name: "research"
+    label: "🔬 Research projects"
+    files:
+      - name: "research"
+        label: "Research projects"
+        file: "content/research.json"
+        format: json
+        fields:
+          - label: "Projects"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, required: false }
+              - { label: "Cover image", name: "cover", widget: "image", required: false }
+              - { label: "Summary", name: "summary", widget: "text", required: false }
+              - { label: "Link (optional)", name: "link", widget: "string", required: false }
+              - { label: "Link label", name: "linkLabel", widget: "string", required: false }
+
+  # ---------------- HOME ----------------
+  - name: "home"
+    label: "🏠 Home page"
+    files:
+      - name: "home"
+        label: "Home / intro"
+        file: "content/home.json"
+        format: json
+        fields:
+          - { label: "Your name (big heading)", name: "heading", widget: "string", hint: "Wrap words in *stars* to give them the coloured accent." }
+          - { label: "Your title", name: "study", widget: "string", hint: "Shown just under your name, e.g. Marine Biologist" }
+          - { label: "Intro paragraph", name: "intro", widget: "text" }
+          - { label: "Career goals", name: "goals", widget: "text" }
+          - { label: "Your photo", name: "photo", widget: "image", required: false }
+
+  # ---------------- ABOUT ----------------
+  - name: "about"
+    label: "👤 About / CV"
+    files:
+      - name: "about"
+        label: "About me"
+        file: "content/about.json"
+        format: json
+        fields:
+          - { label: "Section title", name: "title", widget: "string" }
+          - { label: "Your story", name: "bio", widget: "markdown" }
+          - { label: "Skills", name: "skills", widget: "list", required: false, hint: "One skill per item." }
+          - { label: "CV button label", name: "cvLabel", widget: "string", required: false }
+          - { label: "CV file / link", name: "cvUrl", widget: "file", required: false, hint: "Upload a PDF or paste a link." }
+          - { label: "'At a glance' title", name: "glanceTitle", widget: "string", required: false }
+          - { label: "'At a glance' text", name: "glance", widget: "markdown", required: false }
 
   # ---------------- RESOURCES ----------------
   - name: "resources"
@@ -169,3 +173,109 @@ collections:
             fields:
               - { label: "Label", name: "label", widget: "string" }
               - { label: "URL", name: "url", widget: "string" }
+
+  # ---------------- SITE TEXT ----------------
+  # Headings, buttons and labels. Mostly a set-it-once job when the site
+  # first goes live. Anywhere it says *stars*, the starred words get the
+  # coloured italic accent.
+  - name: "sitetext"
+    label: "⚙️ Site text & headings"
+    files:
+      - name: "sitetext"
+        label: "All the fixed wording"
+        file: "content/site.json"
+        format: json
+        fields:
+          - label: "Name in the water"
+            name: "wave"
+            widget: "object"
+            fields:
+              - { label: "Your name", name: "name", widget: "string" }
+              - { label: "Line underneath", name: "tagline", widget: "string" }
+
+          - label: "Top of the home page"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Small line above your name", name: "eyebrow", widget: "string" }
+              - { label: "First button", name: "primaryButton", widget: "string" }
+              - { label: "Second button", name: "secondaryButton", widget: "string" }
+
+          - label: "About section"
+            name: "about"
+            widget: "object"
+            fields:
+              - { label: "Small line above the heading", name: "eyebrow", widget: "string" }
+              - { label: "Label on the coloured panel", name: "glanceEyebrow", widget: "string" }
+
+          - label: "Research section"
+            name: "research"
+            widget: "object"
+            fields:
+              - { label: "Small line above the heading", name: "eyebrow", widget: "string" }
+              - { label: "Heading", name: "title", widget: "string", hint: "Wrap words in *stars* for the coloured accent." }
+              - { label: "Sentence underneath", name: "sub", widget: "text" }
+
+          - label: "Field notes section"
+            name: "fieldnotes"
+            widget: "object"
+            fields:
+              - { label: "Small line above the heading", name: "eyebrow", widget: "string" }
+              - { label: "Heading", name: "title", widget: "string", hint: "Wrap words in *stars* for the coloured accent." }
+              - { label: "Sentence underneath", name: "sub", widget: "text" }
+
+          - label: "Gallery section"
+            name: "gallery"
+            widget: "object"
+            fields:
+              - { label: "Small line above the heading", name: "eyebrow", widget: "string" }
+              - { label: "Heading", name: "title", widget: "string", hint: "Wrap words in *stars* for the coloured accent." }
+              - { label: "Sentence underneath", name: "sub", widget: "text" }
+
+          - label: "Resources section"
+            name: "resources"
+            widget: "object"
+            fields:
+              - { label: "Small line above the heading", name: "eyebrow", widget: "string" }
+              - { label: "Heading", name: "title", widget: "string", hint: "Wrap words in *stars* for the coloured accent." }
+              - { label: "Sentence underneath", name: "sub", widget: "text" }
+
+          - { label: "Nudge above the wave at the bottom", name: "tideCue", widget: "string" }
+
+          - label: "'Let's talk' screen at the bottom"
+            name: "end"
+            widget: "object"
+            fields:
+              - { label: "Small line on top", name: "eyebrow", widget: "string" }
+              - { label: "Heading", name: "title", widget: "string", hint: "Wrap words in *stars* for the coloured accent." }
+              - { label: "Credit line at the bottom", name: "credit", widget: "string", hint: "The year is added automatically." }
+
+          - label: "Blog page"
+            name: "blogPage"
+            widget: "object"
+            fields:
+              - { label: "Small line above the heading", name: "eyebrow", widget: "string" }
+              - { label: "Heading", name: "title", widget: "string", hint: "Wrap words in *stars* for the coloured accent." }
+              - { label: "Sentence underneath", name: "sub", widget: "text" }
+
+          - label: "Menu labels"
+            name: "nav"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "About", name: "about", widget: "string" }
+              - { label: "Research", name: "research", widget: "string" }
+              - { label: "Field notes", name: "fieldnotes", widget: "string" }
+              - { label: "Gallery", name: "gallery", widget: "string" }
+              - { label: "Resources", name: "resources", widget: "string" }
+              - { label: "Blog", name: "blog", widget: "string" }
+              - { label: "Contact", name: "contact", widget: "string" }
+
+          - label: "Footer (blog & post pages)"
+            name: "footer"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Your name", name: "brand", widget: "string" }
+              - { label: "After your name", name: "brandSuffix", widget: "string" }
+              - { label: "Credit line", name: "credit", widget: "string", hint: "The year is added automatically." }

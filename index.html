@@ -29,17 +29,17 @@
     <div class="ocean__wet" aria-hidden="true"></div>
   </div>
   <div class="ocean__title">
-    <p class="ocean__name">Hettie Rankin</p>
-    <p class="ocean__tag">Marine Biologist</p>
+    <p class="ocean__name" data-txt="wave.name">Hettie Rankin</p>
+    <p class="ocean__tag" data-txt="wave.tagline">Marine Biologist</p>
   </div>
 
   <!-- ===================== END SCREEN ===================== -->
   <div class="ocean__end" id="oceanEnd">
-    <span class="eyebrow">The tide's in</span>
-    <h2>Let's <span class="grad-serif">talk</span></h2>
+    <span class="eyebrow" data-txt="end.eyebrow">The tide's in</span>
+    <h2 data-txt="end.title">Let's <span class="grad-serif">talk</span></h2>
     <p class="end-lead" data-contact="blurb">Interested in collaborating, or just want to chat marine ecology? Get in touch.</p>
     <div class="contact-links" id="floodLinks"></div>
-    <p class="end-credit">© <span data-site="year"></span> Hettie Rankin · Made with 🦀 in Cornwall</p>
+    <p class="end-credit">© <span data-site="year"></span> <span data-txt="end.credit">Hettie Rankin · Made with 🦀 in Cornwall</span></p>
   </div>
 
   <!-- ===================== HEADER ===================== -->
@@ -50,13 +50,13 @@
       </a>
       <button class="nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
       <nav class="nav-links" id="navLinks">
-        <a href="#about">About</a>
-        <a href="#research">Research</a>
-        <a href="#field">Field&nbsp;Notes</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#resources">Resources</a>
-        <a href="blog.html">Blog</a>
-        <a href="#contact" class="cta">Contact</a>
+        <a href="#about" data-txt="nav.about">About</a>
+        <a href="#research" data-txt="nav.research">Research</a>
+        <a href="#field" data-txt="nav.fieldnotes">Field&nbsp;Notes</a>
+        <a href="#gallery" data-txt="nav.gallery">Gallery</a>
+        <a href="#resources" data-txt="nav.resources">Resources</a>
+        <a href="blog.html" data-txt="nav.blog">Blog</a>
+        <a href="#contact" class="cta" data-txt="nav.contact">Contact</a>
       </nav>
     </div>
   </header>
@@ -66,14 +66,14 @@
     <section class="hero">
       <div class="container hero-grid">
         <div class="reveal">
-          <span class="eyebrow">Welcome in — mind the tide</span>
+          <span class="eyebrow" data-txt="hero.eyebrow">Welcome in — mind the tide</span>
           <h1 data-home="heading">Hettie Rankin</h1>
           <p class="hero-study" data-home="study">Marine Biologist</p>
           <p class="lead" data-home="intro"></p>
           <div class="hero-goals" data-home="goals"></div>
           <div class="hero-actions">
-            <a href="#research" class="btn btn-primary">See my research</a>
-            <a href="blog.html" class="btn btn-ghost">Read the blog</a>
+            <a href="#research" class="btn btn-primary" data-txt="hero.primaryButton">See my research</a>
+            <a href="blog.html" class="btn btn-ghost" data-txt="hero.secondaryButton">Read the blog</a>
           </div>
         </div>
         <div class="hero-media reveal" data-home="photo">
@@ -87,7 +87,7 @@
       <div class="container">
         <div class="about-grid">
           <div class="reveal">
-            <span class="eyebrow">About me</span>
+            <span class="eyebrow" data-txt="about.eyebrow">About me</span>
             <h2 class="section-title" data-about="title">Background &amp; CV</h2>
             <div class="prose" data-about="bio"></div>
             <div class="skills" data-about="skills"></div>
@@ -95,7 +95,7 @@
           </div>
           <div class="reveal">
             <div class="panel panel--ocean">
-              <span class="eyebrow">At a glance</span>
+              <span class="eyebrow" data-txt="about.glanceEyebrow">At a glance</span>
               <h3 class="section-title" style="font-size:1.6rem" data-about="glanceTitle">Currently</h3>
               <div class="prose" style="color:rgba(234,247,245,0.9)" data-about="glance"></div>
             </div>
@@ -108,9 +108,9 @@
     <section class="section section--tight" id="research">
       <div class="container">
         <div class="reveal">
-          <span class="eyebrow">Research portfolio</span>
-          <h2 class="section-title">Independent <span class="grad-serif">projects</span></h2>
-          <p class="section-sub">Surveys, studies and analyses I've worked on.</p>
+          <span class="eyebrow" data-txt="research.eyebrow">Research portfolio</span>
+          <h2 class="section-title" data-txt="research.title">Independent <span class="grad-serif">projects</span></h2>
+          <p class="section-sub" data-txt="research.sub">Surveys, studies and analyses I've worked on.</p>
         </div>
         <div class="grid grid-3 reveal" data-render="research"></div>
       </div>
@@ -122,9 +122,9 @@
       <span class="doodle" style="bottom:30px;left:4%;--r:-18deg;font-size:1.3rem">⭐</span>
       <div class="container">
         <div class="reveal">
-          <span class="eyebrow">Field notes</span>
-          <h2 class="section-title">Wildlife <span class="grad-serif">observations</span></h2>
-          <p class="section-sub">Species spotted, surveys logged, and notes from the shore.</p>
+          <span class="eyebrow" data-txt="fieldnotes.eyebrow">Field notes</span>
+          <h2 class="section-title" data-txt="fieldnotes.title">Wildlife <span class="grad-serif">observations</span></h2>
+          <p class="section-sub" data-txt="fieldnotes.sub">Species spotted, surveys logged, and notes from the shore.</p>
         </div>
         <div class="grid grid-2 reveal" data-render="fieldnotes"></div>
       </div>
@@ -135,9 +135,9 @@
       <span class="doodle" style="top:34px;left:6%;--r:10deg">🦀</span>
       <div class="container">
         <div class="reveal">
-          <span class="eyebrow">Interactive gallery</span>
-          <h2 class="section-title">Click a photo to <span class="grad-serif">see the experience</span></h2>
-          <p class="section-sub">Each photo opens the story behind it — the dive, the survey, the field trip.</p>
+          <span class="eyebrow" data-txt="gallery.eyebrow">Interactive gallery</span>
+          <h2 class="section-title" data-txt="gallery.title">Click a photo to <span class="grad-serif">see the experience</span></h2>
+          <p class="section-sub" data-txt="gallery.sub">Each photo opens the story behind it — the dive, the survey, the field trip.</p>
         </div>
         <div class="gallery reveal" data-render="gallery"></div>
       </div>
@@ -149,9 +149,9 @@
       <span class="doodle" style="bottom:24px;left:8%;--r:16deg">⭐</span>
       <div class="container">
         <div class="reveal">
-          <span class="eyebrow">Resources</span>
-          <h2 class="section-title">Useful <span class="grad-serif">datasets &amp; tools</span></h2>
-          <p class="section-sub">Datasets, tutorials and links I've found helpful.</p>
+          <span class="eyebrow" data-txt="resources.eyebrow">Resources</span>
+          <h2 class="section-title" data-txt="resources.title">Useful <span class="grad-serif">datasets &amp; tools</span></h2>
+          <p class="section-sub" data-txt="resources.sub">Datasets, tutorials and links I've found helpful.</p>
         </div>
         <div class="grid grid-2 reveal" data-render="resources"></div>
       </div>
@@ -161,7 +161,7 @@
          Deliberately empty: the end screen below is the only contact UI,
          so nothing is duplicated underneath the water. -->
     <section class="section tide-zone" id="contact">
-      <p class="tide-zone__cue">keep going — the tide's coming in<span>🌊</span></p>
+      <p class="tide-zone__cue"><span data-txt="tideCue">keep going — the tide's coming in</span><span>🌊</span></p>
     </section>
   </main>
 

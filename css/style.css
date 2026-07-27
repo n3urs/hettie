@@ -443,7 +443,13 @@ body.is-flooded .ocean__end {
   margin-bottom: 14px;
   color: var(--ink);
 }
-.grad-serif {
+/* the coloured italic accent — either as an explicit span, or from a
+   *starred* word typed in the admin panel (markdown renders it as <em>) */
+.grad-serif,
+.hero h1 em,
+.section-title em,
+.post-hero h1 em,
+.ocean__end h2 em {
   font-family: var(--font-display);
   font-style: italic;
   font-weight: 600;

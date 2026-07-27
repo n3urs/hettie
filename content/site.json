@@ -1,0 +1,60 @@
+{
+  "wave": {
+    "name": "Hettie Rankin",
+    "tagline": "Marine Biologist"
+  },
+  "hero": {
+    "eyebrow": "Welcome in — mind the tide",
+    "primaryButton": "See my research",
+    "secondaryButton": "Read the blog"
+  },
+  "about": {
+    "eyebrow": "About me",
+    "glanceEyebrow": "At a glance"
+  },
+  "research": {
+    "eyebrow": "Research portfolio",
+    "title": "Independent *projects*",
+    "sub": "Surveys, studies and analyses I've worked on."
+  },
+  "fieldnotes": {
+    "eyebrow": "Field notes",
+    "title": "Wildlife *observations*",
+    "sub": "Species spotted, surveys logged, and notes from the shore."
+  },
+  "gallery": {
+    "eyebrow": "Interactive gallery",
+    "title": "Click a photo to *see the experience*",
+    "sub": "Each photo opens the story behind it — the dive, the survey, the field trip."
+  },
+  "resources": {
+    "eyebrow": "Resources",
+    "title": "Useful *datasets & tools*",
+    "sub": "Datasets, tutorials and links I've found helpful."
+  },
+  "tideCue": "keep going — the tide's coming in",
+  "end": {
+    "eyebrow": "The tide's in",
+    "title": "Let's *talk*",
+    "credit": "Hettie Rankin · Made with 🦀 in Cornwall"
+  },
+  "blogPage": {
+    "eyebrow": "The blog",
+    "title": "Notes on *marine ecology*",
+    "sub": "Short articles about what I'm studying, finding and learning."
+  },
+  "nav": {
+    "about": "About",
+    "research": "Research",
+    "fieldnotes": "Field Notes",
+    "gallery": "Gallery",
+    "resources": "Resources",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "footer": {
+    "brand": "Hettie Rankin",
+    "brandSuffix": "Marine Biologist",
+    "credit": "Made with 🦀 in Cornwall"
+  }
+}

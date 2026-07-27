@@ -7,6 +7,40 @@
     el.textContent = new Date().getFullYear();
   });
 
+  // ----- site text (headings, buttons, labels) -----
+  // Every fixed string on the site carries data-txt="path.in.site.json",
+  // so Hettie can reword any of it in the admin panel. Runs on all three
+  // pages, which is why it lives here rather than in content.js.
+  (function siteText() {
+    var nodes = document.querySelectorAll("[data-txt]");
+    if (!nodes.length) return;
+
+    function esc(s) {
+      return String(s)
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+    // *starred* words get the coloured italic accent
+    function accent(s) {
+      return esc(s).replace(/\*([^*]+)\*/g, '<span class="grad-serif">$1</span>');
+    }
+
+    fetch("content/site.json", { cache: "no-cache" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (data) {
+        if (!data) return;
+        nodes.forEach(function (el) {
+          var val = el.getAttribute("data-txt").split(".").reduce(function (o, k) {
+            return o == null ? o : o[k];
+          }, data);
+          // blank or missing leaves the hardcoded fallback in place
+          if (val == null || val === "") return;
+          el.innerHTML = accent(val);
+        });
+      })
+      .catch(function () { /* keep the fallbacks already in the HTML */ });
+  })();
+
   // ----- mobile nav toggle -----
   var toggle = document.querySelector(".nav-toggle");
   var links = document.getElementById("navLinks");
