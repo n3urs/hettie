@@ -24,11 +24,6 @@
     if (isNaN(dt)) return esc(d);
     return dt.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
   }
-  function fill(sel, key, value) {
-    document.querySelectorAll('[' + key + ']').forEach(function (el) {
-      if (el.getAttribute(key) === sel) el.innerHTML = value;
-    });
-  }
   function set(attr, name, html) {
     document.querySelectorAll('[data-' + attr + '="' + name + '"]').forEach(function (el) {
       el.innerHTML = html;
@@ -174,8 +169,10 @@
 
   // ---------- MODAL ----------
   var modal = document.getElementById("galleryModal");
+  var lastFocus = null;   // where keyboard focus was before the modal opened
   function openModal(g) {
     if (!g || !modal) return;
+    lastFocus = document.activeElement;
     document.getElementById("modalMedia").innerHTML = g.image
       ? '<img src="' + esc(img(g.image, 1600)) + '" data-fallback="' + esc(g.image) + '" alt="' + esc(g.title) + '">' : "";
     document.getElementById("modalTitle").textContent = g.title || "";
@@ -184,11 +181,14 @@
     imgFix(document.getElementById("modalExperience"), 1200);
     modal.classList.add("open");
     document.body.style.overflow = "hidden";
+    modal.querySelector(".modal-close").focus();
   }
   function closeModal() {
     if (!modal) return;
     modal.classList.remove("open");
     document.body.style.overflow = "";
+    // hand keyboard focus back to the photo that opened the modal
+    if (lastFocus && lastFocus.focus) { lastFocus.focus(); lastFocus = null; }
   }
   if (modal) {
     modal.querySelector(".modal-close").addEventListener("click", closeModal);

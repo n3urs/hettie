@@ -4,13 +4,23 @@
    Escapes HTML first, so content is safe to inject. */
 (function (global) {
   function esc(s) {
-    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+  // Only allow web/mail/relative URLs into href/src — a pasted
+  // javascript: (or data:/vbscript:) link must never execute.
+  function safeUrl(u) {
+    return /^\s*(javascript|data|vbscript)\s*:/i.test(u) ? "#" : u;
   }
   function inline(s) {
     // images ![alt](src)
-    s = s.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, '<img alt="$1" src="$2" loading="lazy">');
+    s = s.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, function (m, alt, src) {
+      return '<img alt="' + alt + '" src="' + safeUrl(src) + '" loading="lazy">';
+    });
     // links [text](href)
-    s = s.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    s = s.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, function (m, text, href) {
+      return '<a href="' + safeUrl(href) + '" target="_blank" rel="noopener">' + text + '</a>';
+    });
     // bold **x** / __x__
     s = s.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
     s = s.replace(/__([^_]+)__/g, "<strong>$1</strong>");
