@@ -1,9 +1,16 @@
 {
   "title": "Background & CV",
   "bio": "I'm a marine biologist, recently graduated from the University of Exeter (Penryn). My interests span rocky-shore ecology, marine invertebrates and coastal conservation.\n\nI'm currently three months into an internship with the Inshore Fisheries and Conservation Authority (IFCA), working on inshore fisheries and habitat conservation around the Cornish coast.\n\nWhen I'm not out surveying, you'll usually find me on the Cornish coast — rock-pooling, or photographing whatever the tide brings in.\n\nReplace this text in the admin panel with your own story, background and what you're hoping to do next.",
-  "skills": ["Rocky-shore surveys", "Species ID", "Data analysis", "Field sampling", "Marine invertebrates", "Scientific writing"],
+  "skills": [
+    "Rocky-shore surveys",
+    "Species ID",
+    "Data analysis",
+    "Field sampling",
+    "Marine invertebrates",
+    "Scientific writing"
+  ],
   "cvLabel": "Download my CV",
-  "cvUrl": "",
+  "cvUrl": "/assets/uploads/hr.-cv.20-06.pdf",
   "glanceTitle": "Currently",
-  "glance": "🦀 **IFCA intern** — inshore fisheries & conservation\n\n📍 Based in Cornwall\n\n🎓 Graduated from Exeter (Penryn)\n\n🔬 Interested in coastal ecology & conservation"
+  "glance": "🦀 **Cornwall** **IFCA intern** — Cornwall Inshore Fisheries Conservation Authorities\n\n📍 Based in Cornwall\n\n🎓 Graduated from the University of Exeter (Penryn)\n\n🔬 Interested in coastal ecology & conservation"
 }
