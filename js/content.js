@@ -4,6 +4,9 @@
   "use strict";
 
   var reveal = window.__revealObserve || function () {};
+  // resized via Netlify's image CDN — see js/main.js
+  var img = window.__img || function (s) { return s; };
+  var imgFix = window.__imgFix || function () {};
 
   function get(url) {
     return fetch(url, { cache: "no-cache" })
@@ -43,7 +46,7 @@
     if (d.goals) set("home", "goals", esc(d.goals));
     if (d.photo) {
       var m = document.querySelector('[data-home="photo"]');
-      if (m) m.innerHTML = '<img src="' + esc(d.photo) + '" alt="Portrait">';
+      if (m) m.innerHTML = '<img src="' + esc(img(d.photo, 900)) + '" data-fallback="' + esc(d.photo) + '" alt="Portrait">';
     }
   });
 
@@ -51,7 +54,7 @@
   get("content/about.json").then(function (d) {
     if (!d) return;
     if (d.title) set("about", "title", esc(d.title));
-    if (d.bio) set("about", "bio", md.render(d.bio));
+    if (d.bio) { set("about", "bio", md.render(d.bio)); imgFix(document.querySelector('[data-about="bio"]'), 1000); }
     if (d.glanceTitle) set("about", "glanceTitle", esc(d.glanceTitle));
     if (d.glance) set("about", "glance", md.render(d.glance));
     if (Array.isArray(d.skills) && d.skills.length) {
@@ -71,7 +74,7 @@
     var items = d && d.items || [];
     if (!items.length) { empty(el, "Research projects will appear here."); return; }
     el.innerHTML = items.map(function (p) {
-      var cover = p.cover ? '<div class="card-cover"><img src="' + esc(p.cover) + '" alt="' + esc(p.title) + '" loading="lazy"></div>' : "";
+      var cover = p.cover ? '<div class="card-cover"><img src="' + esc(img(p.cover, 900)) + '" data-fallback="' + esc(p.cover) + '" alt="' + esc(p.title) + '" loading="lazy"></div>' : "";
       var link = p.link ? '<a class="card-link" href="' + esc(p.link) + '" target="_blank" rel="noopener">' + esc(p.linkLabel || "View project") + '</a>' : "";
       return '<article class="card">' + cover +
         (p.date ? '<span class="meta">' + fmtDate(p.date) + '</span>' : "") +
@@ -87,7 +90,7 @@
     var items = d && d.items || [];
     if (!items.length) { empty(el, "Field notes will appear here."); return; }
     el.innerHTML = items.map(function (n) {
-      var photo = n.photo ? '<img src="' + esc(n.photo) + '" alt="' + esc(n.species || n.location) + '" loading="lazy">' : "";
+      var photo = n.photo ? '<img src="' + esc(img(n.photo, 500)) + '" data-fallback="' + esc(n.photo) + '" alt="' + esc(n.species || n.location) + '" loading="lazy">' : "";
       return '<article class="note">' +
         '<div class="note-photo">' + photo + '</div>' +
         '<div>' +
@@ -106,8 +109,8 @@
     galleryData = d && d.items || [];
     if (!galleryData.length) { empty(el, "Photos will appear here — click one to reveal its story."); return; }
     el.innerHTML = galleryData.map(function (g, idx) {
-      var img = g.image ? '<img src="' + esc(g.image) + '" alt="' + esc(g.title) + '" loading="lazy">' : "";
-      return '<button class="gallery-item" data-idx="' + idx + '">' + img +
+      var thumb = g.image ? '<img src="' + esc(img(g.image, 800)) + '" data-fallback="' + esc(g.image) + '" alt="' + esc(g.title) + '" loading="lazy">' : "";
+      return '<button class="gallery-item" data-idx="' + idx + '">' + thumb +
         '<span class="g-hint">+</span>' +
         '<span class="g-label">' + esc(g.title || "Untitled") + '</span></button>';
     }).join("");
@@ -145,10 +148,12 @@
   var modal = document.getElementById("galleryModal");
   function openModal(g) {
     if (!g || !modal) return;
-    document.getElementById("modalMedia").innerHTML = g.image ? '<img src="' + esc(g.image) + '" alt="' + esc(g.title) + '">' : "";
+    document.getElementById("modalMedia").innerHTML = g.image
+      ? '<img src="' + esc(img(g.image, 1600)) + '" data-fallback="' + esc(g.image) + '" alt="' + esc(g.title) + '">' : "";
     document.getElementById("modalTitle").textContent = g.title || "";
     document.getElementById("modalMeta").textContent = [fmtDate(g.date), g.location].filter(Boolean).join(" · ");
     document.getElementById("modalExperience").innerHTML = md.render(g.experience || "");
+    imgFix(document.getElementById("modalExperience"), 1200);
     modal.classList.add("open");
     document.body.style.overflow = "hidden";
   }

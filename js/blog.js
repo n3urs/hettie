@@ -10,6 +10,8 @@
     var dt = new Date(d);
     return isNaN(dt) ? esc(d) : dt.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
   }
+  // resized via Netlify's image CDN — see js/main.js
+  var img = window.__img || function (s) { return s; };
   var list = document.getElementById("postList");
 
   fetch("content/blog.json", { cache: "no-cache" })
@@ -23,7 +25,7 @@
       // newest first
       posts.sort(function (a, b) { return new Date(b.date || 0) - new Date(a.date || 0); });
       list.innerHTML = posts.map(function (p) {
-        var cover = p.cover ? '<div class="card-cover"><img src="' + esc(p.cover) + '" alt="' + esc(p.title) + '" loading="lazy"></div>' : "";
+        var cover = p.cover ? '<div class="card-cover"><img src="' + esc(img(p.cover, 900)) + '" data-fallback="' + esc(p.cover) + '" alt="' + esc(p.title) + '" loading="lazy"></div>' : "";
         var tags = (p.tags || []).length ? '<div class="tag-row">' + p.tags.map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join("") + '</div>' : "";
         return '<a class="card" href="post.html?slug=' + encodeURIComponent(p.slug || "") + '">' +
           cover +

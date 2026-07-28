@@ -41,6 +41,54 @@
       .catch(function () { /* keep the fallbacks already in the HTML */ });
   })();
 
+  // ----- responsive images -----
+  // Hettie uploads photos straight off a phone or laptop, so they arrive at
+  // 2-5MB. Netlify's image CDN resizes and re-encodes them on the fly, which
+  // means she never has to think about it: full-size in, ~50KB out.
+  //
+  // The CDN only exists on Netlify, so localhost and GitHub Pages fall back
+  // to the original file. Anything that isn't a local upload (an external
+  // URL) is left alone.
+  var CDN_OK = !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) &&
+               !/\.github\.io$/.test(location.hostname) &&
+               location.protocol !== "file:";
+
+  window.__img = function (src, width) {
+    if (!src) return "";
+    if (!CDN_OK || !/^\/?assets\//.test(src)) return src;
+    var path = src.charAt(0) === "/" ? src : "/" + src;
+    return "/.netlify/images?url=" + encodeURIComponent(path) +
+           "&w=" + (width || 1000) + "&fm=webp&q=78";
+  };
+
+  // Rewrites <img> elements already in the DOM — used for photos that come
+  // out of markdown, where we don't build the tag ourselves.
+  window.__imgFix = function (root, width) {
+    if (!root) return;
+    root.querySelectorAll("img").forEach(function (im) {
+      var raw = im.getAttribute("src");
+      var opt = window.__img(raw, width);
+      if (opt && opt !== raw) {
+        im.setAttribute("data-fallback", raw);
+        im.setAttribute("src", opt);
+      }
+      if (!im.hasAttribute("loading")) im.setAttribute("loading", "lazy");
+    });
+  };
+
+  // If a transform ever fails, quietly swap back to the original so a photo
+  // never just disappears. 'error' doesn't bubble, hence capture phase.
+  document.addEventListener("error", function (e) {
+    var el = e.target;
+    if (el && el.tagName === "IMG") {
+      var fb = el.getAttribute("data-fallback");
+      if (fb && el.getAttribute("src") !== fb) {
+        el.removeAttribute("data-fallback");
+        el.setAttribute("src", fb);
+      }
+    }
+  }, true);
+
   // ----- mobile nav toggle -----
   var toggle = document.querySelector(".nav-toggle");
   var links = document.getElementById("navLinks");
