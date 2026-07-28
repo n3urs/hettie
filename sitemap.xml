@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Sitemaps require absolute URLs — relative ones are rejected by search
+     engines. If a custom domain is added later, update these and the
+     Sitemap line in robots.txt. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>/</loc></url>
-  <url><loc>/blog.html</loc></url>
+  <url><loc>https://marinehettie.netlify.app/</loc></url>
+  <url><loc>https://marinehettie.netlify.app/blog.html</loc></url>
 </urlset>
