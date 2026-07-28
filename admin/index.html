@@ -10,8 +10,12 @@
 <body>
   <!-- Netlify Identity widget: powers login for the CMS -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <!-- Decap CMS (the open-source Netlify CMS) -->
-  <script src="https://unpkg.com/decap-cms@^3.3.3/dist/decap-cms.js"></script>
+  <!-- Decap CMS (the open-source Netlify CMS).
+       Pinned to an exact version on purpose: with a ^ range this loaded
+       whatever the newest 3.x happened to be that day, so a bad release
+       could break Hettie's admin panel with nobody having touched the repo.
+       To upgrade, bump this number, open /admin and check it still works. -->
+  <script src="https://unpkg.com/decap-cms@3.15.1/dist/decap-cms.js"></script>
   <script>
     // After an invite email, redirect back into the CMS once logged in.
     if (window.netlifyIdentity) {
