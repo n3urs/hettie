@@ -2,5 +2,10 @@
   "blurb": "Interested in collaborating, or just want to talk marine ecology? Get in touch.",
   "email": "hettie.rankin@yahoo.com",
   "linkedin": "",
-  "links": []
+  "links": [
+    {
+      "label": "Instagram",
+      "url": "https://www.instagram.com/marine.hettie/"
+    }
+  ]
 }
