@@ -255,8 +255,22 @@
           var links = [];
           if (d.email) links.push('<a href="mailto:' + esc(d.email) + '">✉️ ' + esc(d.email) + '</a>');
           if (d.linkedin) links.push('<a href="' + esc(d.linkedin) + '" target="_blank" rel="noopener">in LinkedIn</a>');
+          // Give recognisable platforms their own mark so "Other links"
+          // doesn't render everything as an anonymous arrow.
+          var MARKS = [
+            [/instagram/i, "📷"], [/researchgate/i, "🔬"], [/orcid/i, "🆔"],
+            [/bsky|bluesky/i, "🦋"], [/twitter|x\.com/i, "𝕏"],
+            [/facebook/i, "f"], [/youtube/i, "▶"], [/tiktok/i, "♪"],
+            [/github/i, "◆"], [/inaturalist/i, "🌿"]
+          ];
           (d.links || []).forEach(function (l) {
-            if (l.url) links.push('<a href="' + esc(l.url) + '" target="_blank" rel="noopener">↗ ' + esc(l.label || l.url) + '</a>');
+            if (!l.url) return;
+            var hay = (l.url + " " + (l.label || "")).toLowerCase(), mark = "↗";
+            for (var i = 0; i < MARKS.length; i++) {
+              if (MARKS[i][0].test(hay)) { mark = MARKS[i][1]; break; }
+            }
+            links.push('<a href="' + esc(l.url) + '" target="_blank" rel="noopener">' +
+              mark + " " + esc(l.label || l.url) + '</a>');
           });
           if (links.length) floodLinks.innerHTML = links.join("");
         })

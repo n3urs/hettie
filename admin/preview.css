@@ -1,0 +1,71 @@
+/* preview.css — loaded only inside the CMS preview pane, on top of the real
+   site stylesheet. The site CSS assumes a full page with a fixed ocean band
+   and scroll-triggered reveals; this strips that back so the pane shows the
+   content itself, styled the way it will actually look. */
+
+body {
+  background:
+    radial-gradient(900px 380px at 50% -10%, rgba(255, 246, 226, 0.75), transparent 70%),
+    linear-gradient(180deg, #f6efe0 0%, #ecdfc6 100%);
+  padding: 26px 24px 60px;
+  margin: 0;
+  min-height: 100%;
+}
+
+/* the ocean, header and end screen are page furniture — not content */
+.ocean, .ocean__title, .ocean__end, .cursor-glow, .site-header,
+.tide-zone, .doodle, .site-footer { display: none !important; }
+
+/* scroll reveals never fire in here, so make sure nothing starts invisible */
+.reveal, [class*="reveal"] { opacity: 1 !important; transform: none !important; }
+
+.pv-wrap { max-width: 720px; margin: 0 auto; }
+
+/* a small label so she knows this is a preview, not the live page */
+.pv-note {
+  font-family: var(--font-hand, cursive);
+  font-size: 1rem;
+  color: #9a8f78;
+  text-align: center;
+  margin: 0 0 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.12);
+}
+
+.pv-empty {
+  color: #9a8f78;
+  font-style: italic;
+  padding: 22px 0;
+  text-align: center;
+}
+
+/* each post/item sits on its own card so multiple entries stay readable */
+.pv-item {
+  background: rgba(255, 253, 247, 0.72);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 18px;
+  padding: 26px 24px;
+  margin-bottom: 22px;
+  box-shadow: 0 12px 30px -22px rgba(20, 60, 70, 0.45);
+}
+.pv-item + .pv-item { margin-top: 4px; }
+
+.pv-item h1 {
+  font-size: clamp(1.6rem, 4vw, 2.1rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  margin: 0 0 8px;
+}
+.pv-item img { max-width: 100%; height: auto; border-radius: 12px; }
+.pv-cover { margin: 14px 0 18px; }
+.pv-cover img { width: 100%; object-fit: cover; max-height: 300px; }
+
+/* gallery previews keep the polaroid feel without the hover machinery */
+.pv-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; }
+.pv-shot { background: #fff; padding: 8px 8px 34px; border-radius: 4px; position: relative;
+           box-shadow: 0 10px 24px -16px rgba(20, 60, 70, 0.6); }
+.pv-shot img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 2px; }
+.pv-shot span { position: absolute; bottom: 8px; left: 0; right: 0; text-align: center;
+                font-family: var(--font-hand, cursive); font-size: 1rem; color: #4a4335; }
+
+.pv-skills { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
