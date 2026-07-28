@@ -105,6 +105,27 @@ collections:
               - { label: "Link (optional)", name: "link", widget: "string", required: false }
               - { label: "Link label", name: "linkLabel", widget: "string", required: false }
 
+  # ---------------- IN THE NEWS ----------------
+  - name: "press"
+    label: "📰 In the news"
+    files:
+      - name: "press"
+        label: "Press & coverage"
+        file: "content/press.json"
+        format: json
+        fields:
+          - label: "Articles & mentions"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.outlet}} — {{fields.title}}"
+            fields:
+              - { label: "Publication or programme", name: "outlet", widget: "string", hint: "e.g. BBC News, Falmouth Packet, Radio Cornwall" }
+              - { label: "Headline", name: "title", widget: "string" }
+              - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, required: false }
+              - { label: "Link to the article", name: "url", widget: "string", required: false, hint: "Paste the full web address. Leave blank if it isn't online." }
+              - { label: "Photo", name: "image", widget: "image", required: false, hint: "A photo of you, or a screenshot of the article." }
+              - { label: "What it was about", name: "summary", widget: "text", required: false }
+
   # ---------------- HOME ----------------
   - name: "home"
     label: "🏠 Home page"
@@ -218,6 +239,14 @@ collections:
               - { label: "Heading", name: "title", widget: "string", hint: "Wrap words in *stars* for the coloured accent." }
               - { label: "Sentence underneath", name: "sub", widget: "text" }
 
+          - label: "In the news section"
+            name: "press"
+            widget: "object"
+            fields:
+              - { label: "Small line above the heading", name: "eyebrow", widget: "string" }
+              - { label: "Heading", name: "title", widget: "string", hint: "Wrap words in *stars* for the coloured accent." }
+              - { label: "Sentence underneath", name: "sub", widget: "text" }
+
           - label: "Field notes section"
             name: "fieldnotes"
             widget: "object"
@@ -267,6 +296,7 @@ collections:
             fields:
               - { label: "About", name: "about", widget: "string" }
               - { label: "Research", name: "research", widget: "string" }
+              - { label: "Press", name: "press", widget: "string" }
               - { label: "Field notes", name: "fieldnotes", widget: "string" }
               - { label: "Gallery", name: "gallery", widget: "string" }
               - { label: "Resources", name: "resources", widget: "string" }

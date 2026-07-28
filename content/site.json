@@ -17,6 +17,11 @@
     "title": "Independent *projects*",
     "sub": "Surveys, studies and analyses I've worked on."
   },
+  "press": {
+    "eyebrow": "In the news",
+    "title": "Press & *coverage*",
+    "sub": "Where my work has been written about and broadcast."
+  },
   "fieldnotes": {
     "eyebrow": "Field notes",
     "title": "Wildlife *observations*",
@@ -46,6 +51,7 @@
   "nav": {
     "about": "About",
     "research": "Research",
+    "press": "Press",
     "fieldnotes": "Field Notes",
     "gallery": "Gallery",
     "resources": "Resources",

@@ -691,6 +691,51 @@ body.is-flooded .ocean__end {
 .note p { color: var(--mute); font-size: 0.95rem; }
 @media (max-width: 520px) { .note { grid-template-columns: 84px 1fr; } }
 
+/* ---------- press: newspaper cuttings pinned to the sand ---------- */
+.press { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: clamp(16px, 2.4vw, 26px); }
+.clip {
+  position: relative;
+  display: block;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 252, 0.97), rgba(252, 249, 240, 0.97));
+  border: 1px solid rgba(90, 80, 60, 0.16);
+  border-radius: 3px;
+  padding: 0 0 18px;
+  box-shadow: 0 14px 34px -24px rgba(30, 50, 60, 0.7);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.press > .clip:nth-child(odd) { transform: rotate(-0.8deg); }
+.press > .clip:nth-child(even) { transform: rotate(0.7deg); }
+.press > .clip:hover { transform: rotate(0deg) translateY(-4px); box-shadow: 0 22px 44px -24px rgba(30, 50, 60, 0.75); }
+
+/* a torn-paper nibble along the top edge */
+.clip::before {
+  content: "";
+  position: absolute; inset: 0 0 auto 0; height: 6px;
+  background:
+    radial-gradient(5px 6px at 5px 0, transparent 60%, rgba(255, 255, 252, 0.97) 61%) repeat-x;
+  background-size: 11px 6px;
+  z-index: 2;
+}
+.clip-shot { aspect-ratio: 16/9; overflow: hidden; background: linear-gradient(165deg, var(--sea-2), var(--teal)); }
+.clip-shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.clip-body { padding: 16px 18px 0; display: flex; flex-direction: column; gap: 7px; }
+.clip-outlet {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--deep);
+  padding-bottom: 7px;
+  border-bottom: 2px solid rgba(7, 59, 76, 0.16);
+}
+.clip h3 { font-size: 1.06rem; line-height: 1.32; letter-spacing: -0.01em; color: var(--ink); }
+.clip .meta { font-family: var(--font-hand); font-size: 1rem; color: var(--soft); }
+.clip p { color: var(--mute); font-size: 0.93rem; }
+.clip .card-link { margin-top: 2px; }
+
 /* ---------- interactive gallery: polaroid snapshots ---------- */
 .gallery {
   display: grid;

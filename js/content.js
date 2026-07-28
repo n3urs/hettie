@@ -84,6 +84,34 @@
     reveal(el);
   });
 
+  // ---------- IN THE NEWS ----------
+  get("content/press.json").then(function (d) {
+    var el = target("press");
+    var items = (d && d.items || []).slice();
+    if (!items.length) { empty(el, "News coverage will appear here."); return; }
+    // newest first
+    items.sort(function (a, b) { return new Date(b.date || 0) - new Date(a.date || 0); });
+    el.innerHTML = items.map(function (p) {
+      var shot = p.image
+        ? '<div class="clip-shot"><img src="' + esc(img(p.image, 700)) + '" data-fallback="' + esc(p.image) +
+          '" alt="' + esc(p.title || p.outlet) + '" loading="lazy"></div>'
+        : "";
+      var inner =
+        shot +
+        '<div class="clip-body">' +
+        (p.outlet ? '<div class="clip-outlet">' + esc(p.outlet) + '</div>' : "") +
+        (p.title ? '<h3>' + esc(p.title) + '</h3>' : "") +
+        (p.date ? '<div class="meta">' + fmtDate(p.date) + '</div>' : "") +
+        (p.summary ? '<p>' + esc(p.summary) + '</p>' : "") +
+        (p.url ? '<span class="card-link">Read the article</span>' : "") +
+        '</div>';
+      return p.url
+        ? '<a class="clip" href="' + esc(p.url) + '" target="_blank" rel="noopener">' + inner + '</a>'
+        : '<div class="clip">' + inner + '</div>';
+    }).join("");
+    reveal(el);
+  });
+
   // ---------- FIELD NOTES ----------
   get("content/fieldnotes.json").then(function (d) {
     var el = target("fieldnotes");

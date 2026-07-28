@@ -133,6 +133,24 @@
     }
   });
 
+  // ---------------- IN THE NEWS ----------------
+  var PressPreview = createClass({
+    render: function () {
+      var items = (toJS(this.props.entry).items || []).slice();
+      items.sort(function (a, b) { return new Date(b.date || 0) - new Date(a.date || 0); });
+      return wrap("Press preview — newest first", items.map(function (p, i) {
+        return h("div", { className: "pv-item", key: i },
+          img(p.image, "pv-cover"),
+          p.outlet ? h("div", { className: "clip-outlet" }, p.outlet) : null,
+          h("h1", { style: { fontSize: "1.3rem", marginTop: "10px" } }, p.title || "Untitled"),
+          h("p", { className: "meta" }, date(p.date)),
+          p.summary ? h("p", {}, p.summary) : null,
+          p.url ? h("p", {}, h("span", { className: "card-link" }, "Read the article")) : null
+        );
+      }));
+    }
+  });
+
   // ---------------- FIELD NOTES ----------------
   var FieldNotesPreview = createClass({
     render: function () {
@@ -214,6 +232,7 @@
           h("p", { className: "meta", style: { marginTop: "12px" } }, hero.eyebrow || "")
         ),
         section("research", d.research),
+        section("press", d.press),
         section("fieldnotes", d.fieldnotes),
         section("gallery", d.gallery),
         section("resources", d.resources),
@@ -227,7 +246,7 @@
   // registering both is harmless.
   [
     ["blog", BlogPreview], ["home", HomePreview], ["about", AboutPreview],
-    ["gallery", GalleryPreview], ["fieldnotes", FieldNotesPreview],
+    ["gallery", GalleryPreview], ["fieldnotes", FieldNotesPreview], ["press", PressPreview],
     ["research", ResearchPreview], ["resources", ResourcesPreview],
     ["contact", ContactPreview], ["sitetext", SiteTextPreview]
   ].forEach(function (pair) {
