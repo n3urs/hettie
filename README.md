@@ -57,6 +57,25 @@ The admin sidebar is ordered by how often you'll need things:
 - Uploaded images are saved automatically; just pick "Choose an image".
 - Copyright years update themselves — no need to edit them each January.
 
+## Photos — upload them full size
+
+Hettie should **not** resize anything before uploading. Every image is served
+through Netlify's image CDN (`/.netlify/images`), which resizes and converts to WebP
+on the fly, at a width chosen per context (500px field notes, 800 gallery thumbs,
+900 covers, 1400–1600 full views). Measured: a 4.4MB / 6000×4000px photo is served
+at **55KB**.
+
+The helpers live in `js/main.js` — `window.__img(src, width)` builds the URL, and
+`window.__imgFix(el, width)` rewrites `<img>` tags that come out of markdown. The CDN
+only exists on Netlify, so localhost, GitHub Pages and `file://` fall back to the
+original file automatically, and every transformed image keeps a `data-fallback`
+so a failed transform swaps back rather than showing a broken image.
+
+One thing to watch long-term: git keeps every version of every file forever, so the
+full-size originals accumulate in the repo's history even though visitors never
+download them. Not a problem yet — worth a look if `assets/uploads` gets into the
+hundreds of megabytes.
+
 ## Where the text lives (for Oscar)
 
 Every fixed string carries `data-txt="path.in.site.json"` and is filled in by the site-text
